@@ -3,7 +3,6 @@ package com.markchung.mortgagedaren;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class Interest_period {
 	private EditText edit_rate;
@@ -50,36 +49,17 @@ public class Interest_period {
 	public CheckBox getCheckBox(){
 		return checkbox;
 	}
-	private void setChecked(boolean checked) {
-		checkbox.setChecked(checked);
-	}
 
-	private void setBegin(int value) {
-		edit_begin.setText(Integer.toString(value));
-	}
-	
 	EditText getBeginView(){
 		return edit_begin;
-	}
-
-	private void setBegin(String value) {
-		edit_begin.setText("-");
 	}
 
 	void setEnd(int value) {
 		edit_end.setText(Integer.toString(value));
 	}
 
-	private void setEnd(String value) {
-		edit_end.setText(value);
-	}
-
 	EditText getEndView() {
 		return edit_end;
-	}
-
-	private String getEndString() {
-		return edit_end.getText().toString();
 	}
 
 	private int getEnd() throws NumberFormatException {
@@ -95,10 +75,6 @@ public class Interest_period {
 		edit_rate.setText(Double.toString(d));
 	}
 
-	private void setRate(String value) {
-		edit_rate.setText(value);
-	}
-
 	private double getRate() throws NumberFormatException {
 		try {
 			return Double.parseDouble(edit_rate.getText().toString());
@@ -106,16 +82,6 @@ public class Interest_period {
 			edit_rate.requestFocus();
 			throw e;
 		}
-	}
-
-	private String getRateString() {
-		return edit_rate.getText().toString();
-	}
-
-	private void setPerset(double rate, int begin, int end) {
-		edit_rate.setText(Double.toString(rate));
-		edit_begin.setText(begin);
-		edit_end.setText(end);
 	}
 
 	public void UpdateVisibility() {
