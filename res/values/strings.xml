@@ -1,0 +1,63 @@
+<resources>
+    <string-array name="unit_types">
+        <item></item>
+        <item>Thousand</item>
+        <item>Ten thousand</item>
+        <item>Million</item>
+    </string-array>
+    <string-array name="loan_types">
+        <item >Annuity payments</item>
+        <item >Fixed payments</item>
+    </string-array>
+    <string-array name="conver_units">
+        <item>sq. km</item>
+        <item>hectares</item>
+        <item>Jia(甲)</item>
+        <item>acres</item>
+        <item>ares</item>
+        <item>Ping(坪)</item>
+        <item>sq. metre</item>
+        <item>sq.ft.</item>
+        <item>sq.in.</item>
+        <item>sq.cm.</item>
+    </string-array>
+	<string-array name="detail_type">
+	    <item>Year</item>
+	    <item>Month</item>
+	</string-array>
+    <string name="result_short_payment">Monthly payment</string>
+    <string name="result_short_interest">Total interest</string>
+    <string name="result_short_amount">Total amount</string>
+    <string name="result_short_button">Shcedule</string>
+    <string name="app_name">Loan Calculator</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Loan Calculator</string>
+    <string name="amount">Amount</string>
+    <string name="period">Period</string>
+    <string name="amount_Hint">amount>0</string>
+    <string name="period_Hint">year</string>
+    <string name="year">Year</string>
+    <string name="loan_type">Mortgage type</string>
+    <string name="interest_period">rate %</string>
+    <string name="number_zero">0</string>
+    <string name="tilde">~</string>
+    <string name="months_Hint">month</string>
+    <string name="month">Months</string>
+    <string name="percent">%</string>
+    <string name="grace_period">Grace</string>
+    <string name="calculate">Calculate</string>
+    <string name="clean">Clean</string>
+    <string name="result_nr">Nr</string>
+    <string name="result_principal">Principal</string>
+    <string name="result_interest">Interest</string>
+    <string name="result_payment">Payment</string>
+    <string name="result_goback">Back</string>
+    <string name="dialog_title_wait">please wait</string>
+    <string name="dialog_body_calcelate">busy&#8230;</string>
+    <string name="conver_source">source</string>
+    <string name="conver_source_unit">unit</string>
+    <string name="conver_target_unit">to</string>
+    <string name="conver_result">Result</string>
+    <string name="tab_converter">convertor</string>
+    <string name="tab_loan">loan</string>
+</resources>

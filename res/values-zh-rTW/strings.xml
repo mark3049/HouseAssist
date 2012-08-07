@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="unit_types">
+        <item></item>
+        <item>千</item>
+        <item>萬</item>
+        <item>百萬</item>
+    </string-array>
+    <string-array name="loan_types">
+        <item >本息平均攤還法</item>
+        <item >本金平均攤還法</item>
+    </string-array>
+    <string-array name="conver_units">
+        <item>平方公里</item>
+        <item>公頃</item>
+        <item>台灣甲</item>
+        <item>英畝</item>
+        <item>公畝</item>
+        <item>日坪</item>
+        <item>平方公尺</item>
+        <item>平方呎</item>
+        <item>平方吋</item>
+        <item>平方公分</item>
+    </string-array>
+	<string-array name="detail_type">
+	    <item>年度</item>
+	    <item>每月</item>
+	</string-array>
+    <string name="result_short_payment">月付</string>
+    <string name="result_short_interest">繳息總額</string>
+    <string name="result_short_amount">繳付總額</string>
+    <string name="result_short_button">詳細結果</string>
+    <string name="app_name">房貸達人</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">房貸達人</string>
+    <string name="amount">總額</string>
+    <string name="period">期間</string>
+    <string name="amount_Hint">貸款總額</string>
+    <string name="period_Hint">貸款年</string>
+    <string name="year">年</string>
+    <string name="loan_type">還款方式</string>
+    <string name="interest_period">利率</string>
+    <string name="number_zero">0</string>
+    <string name="tilde">~</string>
+    <string name="months_Hint">月</string>
+    <string name="month">月</string>
+    <string name="percent">%</string>
+    <string name="grace_period">本金寬限期</string>
+    <string name="calculate">計算</string>
+    <string name="clean">清除計算結果</string>
+    <string name="result_nr">期別</string>
+    <string name="result_principal">本金</string>
+    <string name="result_interest">利息</string>
+    <string name="result_payment">月付</string>
+    <string name="result_goback">返回</string>
+    <string name="dialog_title_wait">請稍後</string>
+    <string name="dialog_body_calcelate">運算中&#8230;</string>
+    <string name="conver_source">轉換數值</string>
+    <string name="conver_source_unit">基準單位</string>
+    <string name="conver_target_unit">轉換單位</string>
+    <string name="conver_result">轉換結果</string>
+    <string name="tab_converter">單位轉換</string>
+    <string name="tab_loan">貸款試算</string>    
+</resources>
