@@ -30,10 +30,10 @@
     <string name="result_short_interest">繳息總額</string>
     <string name="result_short_amount">繳付總額</string>
     <string name="result_short_button">詳細結果</string>
-    <string name="app_name">房貸達人</string>
+    <string name="app_name">購屋助手</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">房貸達人</string>
+    <string name="title_activity_main">購屋助手</string>
     <string name="amount">總額</string>
     <string name="period">期間</string>
     <string name="amount_Hint">貸款總額</string>

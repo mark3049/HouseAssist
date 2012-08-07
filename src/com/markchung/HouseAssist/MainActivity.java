@@ -1,6 +1,8 @@
-package com.markchung.mortgagedaren;
+package com.markchung.HouseAssist;
 
 import java.text.NumberFormat;
+
+import com.markchung.HouseAssist.R;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,7 +10,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -155,13 +156,13 @@ public class MainActivity extends Activity implements OnClickListener {
 	private void ClearResult() {
 		m_shortResult.setVisibility(View.GONE);
 	}
-
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-
+*/
 	private int getAmount() {
 		int unit = m_spinner_unit.getSelectedItemPosition();
 		int amount = 0;

@@ -1,4 +1,6 @@
-package com.markchung.mortgagedaren;
+package com.markchung.HouseAssist;
+
+import com.markchung.HouseAssist.R;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

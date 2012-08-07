@@ -1,4 +1,4 @@
-package com.markchung.mortgagedaren;
+package com.markchung.HouseAssist;
 
 import java.text.NumberFormat;
 

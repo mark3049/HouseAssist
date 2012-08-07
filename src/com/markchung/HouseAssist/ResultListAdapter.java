@@ -1,6 +1,8 @@
-package com.markchung.mortgagedaren;
+package com.markchung.HouseAssist;
 
 import java.text.NumberFormat;
+
+import com.markchung.HouseAssist.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;

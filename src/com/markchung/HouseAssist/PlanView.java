@@ -1,4 +1,6 @@
-package com.markchung.mortgagedaren;
+package com.markchung.HouseAssist;
+
+import com.markchung.HouseAssist.R;
 
 import android.content.Context;
 import android.view.View;
@@ -30,6 +32,7 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 				view.findViewById(R.id.linearLayout_interest3));
 
 		m_spinner_type = (Spinner) view.findViewById(R.id.spinner_types);
+		m_interest1.getCheckBox().setChecked(true);
 		m_interest1.getCheckBox().setEnabled(false);
 		m_grace.getCheckBox().setText(context.getString(R.string.grace_period));
 
@@ -106,9 +109,9 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 	@Override
 	public void onCheckedChanged(CompoundButton view, boolean isChecked) {
 		boolean enable;
-		if (view == m_interest1.getCheckBox()) {
+		/*if (view == m_interest1.getCheckBox()) {
 			m_interest1.UpdateVisibility();
-		} else if (view == m_interest2.getCheckBox()) {
+		} else*/ if (view == m_interest2.getCheckBox()) {
 			m_interest2.UpdateVisibility();
 			enable = m_interest2.isEnable();
 			if (!enable) {
