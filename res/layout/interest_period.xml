@@ -38,6 +38,7 @@
             android:enabled="false"
             android:focusable="false"
             android:gravity="center"
+            android:hint="@string/months_Hint"
             />
 
         <TextView
