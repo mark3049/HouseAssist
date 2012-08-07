@@ -14,7 +14,7 @@
     <LinearLayout android:id="@+id/onoff_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >"
+        >
 
         <EditText
             android:id="@+id/edit_rate"
@@ -30,11 +30,13 @@
             android:layout_height="wrap_content"
             android:text="@string/percent" />
 
-        <TextView
+        <EditText
             android:id="@+id/edit_begin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:enabled="false"
+            android:focusable="false"
             android:gravity="center"
             />
 

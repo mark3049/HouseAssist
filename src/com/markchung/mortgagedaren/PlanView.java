@@ -90,6 +90,17 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 		this.m_interest1.setRatePlan(plan.interest1);
 		this.m_interest2.setRatePlan(plan.interest2);
 		this.m_interest3.setRatePlan(plan.interest3);
+		int period = plan.period*12;
+		if(m_grace.isEnable()){
+			m_interest1.getBeginView().setText(Integer.toString(Math.min(plan.grace.end+1,period)));
+		}
+		if(plan.interest2.enable){
+			m_interest2.getBeginView().setText(Integer.toString(Math.min(plan.interest1.end+1,period)));
+		}
+		if(plan.interest3.enable){
+			m_interest3.getBeginView().setText(Integer.toString(Math.min(plan.interest2.end+1,period)));
+		}
+		
 	}
 
 	@Override

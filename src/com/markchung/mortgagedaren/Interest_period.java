@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class Interest_period {
 	private EditText edit_rate;
-	private TextView edit_begin;
+	private EditText edit_begin;
 	private EditText edit_end;
 	private CheckBox checkbox;
 	private View mView;
@@ -15,7 +15,7 @@ public class Interest_period {
 	Interest_period(View root) {
 		mView = root.findViewById(R.id.onoff_view);
 		edit_rate = (EditText) mView.findViewById(R.id.edit_rate);
-		edit_begin = (TextView) mView.findViewById(R.id.edit_begin);
+		edit_begin = (EditText) mView.findViewById(R.id.edit_begin);
 		edit_end = (EditText) mView.findViewById(R.id.edit_end);
 		checkbox = (CheckBox) root.findViewById(R.id.checkbox);
 		if (checkbox.isChecked()) {
@@ -58,7 +58,7 @@ public class Interest_period {
 		edit_begin.setText(Integer.toString(value));
 	}
 	
-	TextView getBeginView(){
+	EditText getBeginView(){
 		return edit_begin;
 	}
 
