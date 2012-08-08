@@ -1,5 +1,7 @@
 package com.markchung.HouseAssist;
 
+import java.text.NumberFormat;
+
 import com.markchung.HouseAssist.R;
 
 import android.view.View;
@@ -74,7 +76,10 @@ public class Interest_period {
 	}
 
 	private void setRate(double d) {
-		edit_rate.setText(Double.toString(d));
+		NumberFormat nr = NumberFormat.getNumberInstance();
+		nr.setMaximumFractionDigits(3);
+		//DecimalFormat nr = new DecimalFormat("0.000");
+		edit_rate.setText(nr.format(d));
 	}
 
 	private double getRate() throws NumberFormatException {
