@@ -37,6 +37,8 @@
         </activity>
         <activity android:name=".ConverterActivity" >
         </activity>
+        <activity android:name=".CompassActivity" >
+        </activity>
         <activity
             android:name="com.markchung.HouseAssist.DetailActivity"
             android:screenOrientation="portrait" >

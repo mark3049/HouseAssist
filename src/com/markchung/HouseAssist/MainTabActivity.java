@@ -17,17 +17,24 @@ public class MainTabActivity extends TabActivity {
 		TabHost.TabSpec spec;
 		Intent intent;
 
-		intent = new Intent().setClass(this,MainActivity.class);
+		intent = new Intent().setClass(this,ConverterActivity.class);
+		spec = tabHost
+                .newTabSpec("conver")
+                .setIndicator(getString(R.string.tab_converter))                        
+                .setContent(intent);
+        tabHost.addTab(spec);
+
+        intent = new Intent().setClass(this,MainActivity.class);
 		spec = tabHost
                 .newTabSpec("loan")
                 .setIndicator(getString(R.string.tab_loan))                        
                 .setContent(intent);
         tabHost.addTab(spec);
         
-		intent = new Intent().setClass(this,ConverterActivity.class);
+		intent = new Intent().setClass(this,CompassActivity.class);
 		spec = tabHost
-                .newTabSpec("detail")
-                .setIndicator(getString(R.string.tab_converter))                        
+                .newTabSpec("compass")
+                .setIndicator(getString(R.string.tab_compass))                        
                 .setContent(intent);
         tabHost.addTab(spec);
         

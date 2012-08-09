@@ -60,4 +60,5 @@
     <string name="conver_result">Result</string>
     <string name="tab_converter">convertor</string>
     <string name="tab_loan">loan</string>
+    <string name="tab_compass">Compass</string>
 </resources>

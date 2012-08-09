@@ -62,4 +62,5 @@
     <string name="conver_result">轉換結果</string>
     <string name="tab_converter">單位轉換</string>
     <string name="tab_loan">貸款試算</string>    
+    <string name="tab_compass">指南針</string>
 </resources>
