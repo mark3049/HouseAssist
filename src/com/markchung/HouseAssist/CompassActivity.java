@@ -30,7 +30,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
 		DisplayMetrics dm = new DisplayMetrics();
 		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int width = dm.widthPixels;
-		int height = dm.heightPixels - 80;
+		int height = dm.heightPixels - 80-50;
 		Bitmap bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.compass);
 		Matrix matrix = new Matrix();
