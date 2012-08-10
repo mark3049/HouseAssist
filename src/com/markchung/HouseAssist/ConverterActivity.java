@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import com.google.ads.*;
 
 public class ConverterActivity extends Activity implements OnClickListener {
 
@@ -42,12 +44,13 @@ public class ConverterActivity extends Activity implements OnClickListener {
 					144, 928.993 },
 			{ -1, -1, -1, -1, 0.000006, 0.00019, 0.000645, 0.006944, 1, 6.452 },
 			{ -1, -1, -1, -1, 0.000001, 0.00003, 0.0001, 0.001076, 0.155, 1 } };
-	private static final String TAG = "mortgagedaren";
-	EditText m_result;
-	Spinner m_target;
-	Spinner m_source;
-	EditText m_input;
-	Button m_btn;
+
+	private EditText m_result;
+	private Spinner m_target;
+	private Spinner m_source;
+	private EditText m_input;
+	private Button m_btn;
+	private AdView adView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,23 +63,39 @@ public class ConverterActivity extends Activity implements OnClickListener {
 		m_btn = (Button) findViewById(R.id.button_calculate);
 		m_btn.setOnClickListener(this);
 		if (savedInstanceState == null) {
-			SharedPreferences settings = getSharedPreferences(TAG, 0);
+			SharedPreferences settings = getSharedPreferences(MainActivity.TAG,
+					0);
 			m_input.setText(settings.getString("ConverInput", ""));
 			m_target.setSelection(settings.getInt("ConverTargetUnit", 5));
-			m_source.setSelection(settings.getInt("ConverSourceUnit", 6));			
+			m_source.setSelection(settings.getInt("ConverSourceUnit", 6));
 		}
+		adView = new AdView(this, AdSize.BANNER, MainActivity.myAdID);
+		  LinearLayout layout = (LinearLayout)findViewById(R.id.adview);
+		  layout.addView(adView);
+		  AdRequest adRequest = new AdRequest();
+		  adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+		  adRequest.addTestDevice("BA76119486D364D047D0C789B4F61E46");
+		  adView.loadAd(adRequest);
 	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		adView.destroy();
+		super.onDestroy();
+	}
+
 	@Override
 	protected void onStop() {
 		super.onStop();
-		SharedPreferences settings = getSharedPreferences(TAG, 0);
+		SharedPreferences settings = getSharedPreferences(MainActivity.TAG, 0);
 		SharedPreferences.Editor edit = settings.edit();
 		edit.putInt("ConverTargetUnit", m_target.getSelectedItemPosition());
 		edit.putInt("ConverSourceUnit", m_source.getSelectedItemPosition());
 		edit.putString("ConverInput", m_input.getText().toString());
 		edit.commit();
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		String buf = m_input.getText().toString();

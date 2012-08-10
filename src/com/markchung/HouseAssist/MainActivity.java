@@ -28,7 +28,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button m_btn_detail;
 	private EditText m_edit_amount;
 	private Spinner m_spinner_unit;
-	private static final String TAG = "mortgagedaren";
+	public static final String TAG = "HouseAssist";
+	public static final String myAdID = "a1502374da40dc1";
 	private PlanView m_plan;
 	private LoanPlan m_lastPlan;
 
