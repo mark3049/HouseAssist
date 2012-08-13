@@ -60,7 +60,13 @@
     <string name="conver_source_unit">基准单位</string>
     <string name="conver_target_unit">转换单位</string>
     <string name="conver_result">转换结果</string>
-    <string name="tab_converter">单位转换</string>
-    <string name="tab_loan">贷款试算</string>    
-    <string name="tab_compass">指南针</string>
+    <string name="tab_converter">单位</string>
+    <string name="tab_loan">贷款</string>    
+    <string name="tab_compass">方位</string>
+    <string name="tab_evaluate">估价</string>
+    <string name="eval_area">总面积</string>
+    <string name="eval_unit_price">单位价格</string>
+    <string name="eval_affiliated">附属建物</string>
+    <string name="eval_amount">总价</string>
+    <string name="eval_note">总价 = 附属建物 + ( 总面积 x 单位价格 )</string>    
 </resources>

@@ -167,9 +167,9 @@ public class MainActivity extends Activity implements OnClickListener {
 */
 	private int getAmount() {
 		int unit = m_spinner_unit.getSelectedItemPosition();
-		int amount = 0;
+		double amount = 0;
 		try {
-			amount = Integer.parseInt(m_edit_amount.getText().toString());
+			amount = Double.parseDouble(m_edit_amount.getText().toString());
 			if (amount <= 0) {
 				m_edit_amount.requestFocus();
 				return -1;
@@ -185,7 +185,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		} else if (unit == 3) {
 			amount *= 1000000;
 		}
-		return amount;
+		return (int)(amount+0.5);
 	}
 
 	// private boolean fill_plan(Plan plan){

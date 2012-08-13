@@ -58,7 +58,7 @@
     <string name="conver_source_unit">unit</string>
     <string name="conver_target_unit">to</string>
     <string name="conver_result">Result</string>
-    <string name="tab_converter">convertor</string>
+    <string name="tab_converter">converter</string>
     <string name="tab_loan">loan</string>
     <string name="tab_compass">Compass</string>
     <string name="tab_evaluate">evaluate</string>
