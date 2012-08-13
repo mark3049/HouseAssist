@@ -24,6 +24,13 @@ public class MainTabActivity extends TabActivity {
                 .setContent(intent);
         tabHost.addTab(spec);
 
+		intent = new Intent().setClass(this,Activity_Evaluate.class);
+		spec = tabHost
+                .newTabSpec("conver")
+                .setIndicator(getString(R.string.tab_evaluate))                        
+                .setContent(intent);
+        tabHost.addTab(spec);
+        
         intent = new Intent().setClass(this,MainActivity.class);
 		spec = tabHost
                 .newTabSpec("loan")

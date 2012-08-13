@@ -61,4 +61,10 @@
     <string name="tab_converter">convertor</string>
     <string name="tab_loan">loan</string>
     <string name="tab_compass">Compass</string>
+    <string name="tab_evaluate">evaluate</string>
+    <string name="eval_area">Area</string>
+    <string name="eval_unit_price">Unit price</string>
+    <string name="eval_affiliated">Auxiliary</string>
+    <string name="eval_amount">Amount</string>
+    <string name="eval_note">Amount = auxiliary + ( area x unit price)</string>
 </resources>

@@ -60,7 +60,14 @@
     <string name="conver_source_unit">基準單位</string>
     <string name="conver_target_unit">轉換單位</string>
     <string name="conver_result">轉換結果</string>
-    <string name="tab_converter">單位轉換</string>
-    <string name="tab_loan">貸款試算</string>    
-    <string name="tab_compass">指南針</string>
+    <string name="tab_converter">單位</string>
+    <string name="tab_loan">貸款</string>    
+    <string name="tab_compass">方位</string>
+    <string name="tab_evaluate">估價</string>
+    <string name="eval_area">總面積</string>
+    <string name="eval_unit_price">單位價格</string>
+    <string name="eval_affiliated">附屬建物</string>
+    <string name="eval_amount">總價</string>
+    <string name="eval_note">總價 = 附屬建物 + ( 總面積 x 單位價格 )</string>
+    
 </resources>

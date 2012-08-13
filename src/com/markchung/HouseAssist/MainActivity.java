@@ -88,7 +88,6 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onStop() {
-		super.onStop();
 		Plan plan = new Plan();
 
 		m_plan.GetSavePaln(plan);
@@ -116,6 +115,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		edit.putInt("interest3_end", plan.interest3.end);
 		edit.commit();
 		// Debug.stopMethodTracing();
+		super.onStop();
+
 	}
 
 	private void InsertResult(Schedule result) {
