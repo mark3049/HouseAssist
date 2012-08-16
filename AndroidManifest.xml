@@ -1,11 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.markchung.HouseAssist"
+    android:installLocation="auto"
     android:versionCode="10"
     android:versionName="1.1.3" >
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:resizeable="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -16,6 +21,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainTabActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -26,9 +32,8 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".ConverterActivity" />
-        <activity android:name=".CompassActivity" />        
-        <activity android:name=".Activity_Evaluate"/>
-        
+        <activity android:name=".CompassActivity" />
+        <activity android:name=".Activity_Evaluate" />
         <activity
             android:name="com.markchung.HouseAssist.DetailActivity"
             android:screenOrientation="portrait" >
