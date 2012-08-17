@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/conver_result" />
-
+
             <EditText
                 android:id="@+id/conver_result"
                 android:layout_width="0dip"
@@ -94,7 +94,9 @@
                 android:layout_gravity="right"
                 android:layout_weight="1"
                 android:enabled="false"
-                android:hint="@string/conver_result" />
+                android:hint="@string/conver_result"
+                android:textColor="@color/result" />
+
         </LinearLayout>
 
         <Button

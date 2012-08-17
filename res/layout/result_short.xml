@@ -6,49 +6,58 @@
     android:background="@layout/roundshape"
     android:orientation="vertical"
     android:padding="5dp" >
-
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/result_short_payment" />
-
+        android:text="@string/result_short_payment"
+        android:textColor="@color/text" />
+
     <TextView
         android:id="@+id/resultshort_payment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right" />
+        android:gravity="right"
+        android:text="@string/number_zero"
+        android:textColor="@color/result" />
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:background="#FF909090" />
-
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/result_short_interest" />
-
+        android:text="@string/result_short_interest"
+        android:textColor="@color/text" />
+
     <TextView
         android:id="@+id/resultshort_interest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right" />
+        android:gravity="right"
+        android:text="@string/number_zero"
+        android:textColor="@color/result" />
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:background="#FF909090" />
-
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/result_short_amount" />
-
+        android:text="@string/result_short_amount"
+        android:textColor="@color/text" />
+
     <TextView
         android:id="@+id/resultshort_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right" />
+        android:gravity="right"
+        android:text="@string/number_zero"
+        android:textColor="@color/result" />
 
     <View
         android:layout_width="fill_parent"

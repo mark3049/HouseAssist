@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="result">#F26A00</color>
+    <color name="result">#A22A00</color>
+    <color name="text">#000000</color>
     <color name="even">#D6D2CE</color>
     <color name="odd">#F8F6F1</color>
     <color name="border">#cccccc</color>
-    <color name="text">#FFFFFF</color>
     <color name="buttonStart">#F0F0F0</color>
     <color name="buttonStop">#C3C3C3</color>
     <color name="buttonBorder">#C3C3C3</color>

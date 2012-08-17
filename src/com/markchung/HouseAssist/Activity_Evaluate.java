@@ -6,6 +6,7 @@ import com.google.ads.AdView;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +28,7 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 	RadioButton m_sel_unit_price;
 	RadioButton m_sel_amount;
 	private AdView adView;
-
+	ColorStateList defColor;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 		m_calculate.setOnClickListener(this);
 		m_sel_unit_price.setOnCheckedChangeListener(this);
 		m_sel_amount.setOnCheckedChangeListener(this);
+		defColor = m_amount.getTextColors();
 		boolean isamount = false;
 		if (savedInstanceState == null) {
 			SharedPreferences sets = getSharedPreferences(MainActivity.TAG, 0);
@@ -124,10 +126,14 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 			m_sel_amount.setChecked(false);
 			m_amount.setEnabled(false);
 			m_unit_price.setEnabled(true);
+			m_amount.setTextColor(getResources().getColor(R.color.result));
+			m_unit_price.setTextColor(defColor);
 		} else {
 			m_sel_unit_price.setChecked(false);
 			m_amount.setEnabled(true);
 			m_unit_price.setEnabled(false);
+			m_unit_price.setTextColor(getResources().getColor(R.color.result));
+			m_amount.setTextColor(defColor);
 		}
 
 	}
