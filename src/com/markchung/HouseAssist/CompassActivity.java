@@ -1,7 +1,5 @@
 package com.markchung.HouseAssist;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
 import com.google.ads.AdView;
 
 import android.app.Activity;
@@ -30,7 +28,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
 		DisplayMetrics dm = new DisplayMetrics();
 		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int width = dm.widthPixels;
-		int height = dm.heightPixels - 80-50;
+		int height = dm.heightPixels - 80 - 50;
 		Bitmap bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.compass);
 		Matrix matrix = new Matrix();
@@ -41,11 +39,22 @@ public class CompassActivity extends Activity implements SensorEventListener {
 				matrix, true);
 
 	}
+
+	@Override
+	protected void onDestroy() {
+		adView.destroy();
+		super.onDestroy();
+	}
+
 	private TextView m_info_view;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_compass);
+		adView = MainActivity.CreateAdRequest(this,
+				(LinearLayout) findViewById(R.id.adview));
+
 		CreateBitmap();
 		sm = (SensorManager) getSystemService(SENSOR_SERVICE);
 		imageView = (ImageView) findViewById(R.id.image_compass);
@@ -55,14 +64,6 @@ public class CompassActivity extends Activity implements SensorEventListener {
 		imageView.setImageMatrix(matrix);
 		imageView.setImageBitmap(m_bmp);
 		m_info_view = (TextView) findViewById(R.id.info_view);
-		
-		adView = new AdView(this, AdSize.BANNER, MainActivity.myAdID);
-		  LinearLayout layout = (LinearLayout)findViewById(R.id.adview);
-		  layout.addView(adView);
-		  AdRequest adRequest = new AdRequest();
-		  adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
-		  adRequest.addTestDevice("BA76119486D364D047D0C789B4F61E46");
-		  adView.loadAd(adRequest);		
 	}
 
 	@Override
@@ -90,15 +91,14 @@ public class CompassActivity extends Activity implements SensorEventListener {
 	public void onSensorChanged(SensorEvent event) {
 		if (event.sensor.getType() != Sensor.TYPE_ORIENTATION)
 			return;
-		float value = 360-event.values[SensorManager.DATA_X];
-		if(value<180){
-			m_info_view.setText(Integer.toString((int)value));
-		}else{
-			m_info_view.setText(Integer.toString((int)(value-360)));
+		float value = 360 - event.values[SensorManager.DATA_X];
+		if (value < 180) {
+			m_info_view.setText(Integer.toString((int) value));
+		} else {
+			m_info_view.setText(Integer.toString((int) (value - 360)));
 		}
-		
-		matrix.setRotate(value,
-				m_bmp.getWidth() / 2, m_bmp.getHeight() / 2);
+
+		matrix.setRotate(value, m_bmp.getWidth() / 2, m_bmp.getHeight() / 2);
 		imageView.setImageMatrix(matrix);
 
 	}

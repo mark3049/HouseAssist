@@ -2,6 +2,9 @@ package com.markchung.HouseAssist;
 
 import java.text.NumberFormat;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 import com.markchung.HouseAssist.R;
 
 import android.os.AsyncTask;
@@ -29,14 +32,28 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Spinner m_spinner_unit;
 	public static final String TAG = "HouseAssist";
 	public static final String myAdID = "a1502374da40dc1";
+	public static final String myTestDevice = "BA76119486D364D047D0C789B4F61E46";
 	private PlanView m_plan;
 	private LoanPlan m_lastPlan;
+	private AdView adView;
+
+	static public final AdView CreateAdRequest(Activity activity,LinearLayout view) {
+		AdView adview = new AdView(activity,AdSize.BANNER, MainActivity.myAdID);
+		view.addView(adview);
+		AdRequest adRequest = new AdRequest();
+		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+		adRequest.addTestDevice(MainActivity.myTestDevice);
+		adview.loadAd(adRequest);
+		return adview;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Debug.startMethodTracing(TAG);
 		setContentView(R.layout.activity_main);
+		adView = CreateAdRequest(this,(LinearLayout) findViewById(R.id.adview));
+
 		m_shortResult = (LinearLayout) this.findViewById(R.id.ResultListView);
 		m_shortResult.setVisibility(View.GONE);
 
@@ -80,7 +97,13 @@ public class MainActivity extends Activity implements OnClickListener {
 			plan.interest3.end = settings.getInt("interest3_end", -1);
 			plan.interest1.enable = true;
 			m_plan.setPlan(plan);
-		} 
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		adView.destroy();
+		super.onDestroy();
 	}
 
 	@Override
@@ -155,13 +178,11 @@ public class MainActivity extends Activity implements OnClickListener {
 	private void ClearResult() {
 		m_shortResult.setVisibility(View.GONE);
 	}
-/*
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
-*/
+
+	/*
+	 * @Override public boolean onCreateOptionsMenu(Menu menu) {
+	 * getMenuInflater().inflate(R.menu.activity_main, menu); return true; }
+	 */
 	private int getAmount() {
 		int unit = m_spinner_unit.getSelectedItemPosition();
 		double amount = 0;
@@ -182,7 +203,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		} else if (unit == 3) {
 			amount *= 1000000;
 		}
-		return (int)(amount+0.5);
+		return (int) (amount + 0.5);
 	}
 
 	// private boolean fill_plan(Plan plan){

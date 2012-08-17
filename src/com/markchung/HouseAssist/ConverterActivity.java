@@ -56,6 +56,9 @@ public class ConverterActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_converter);
+		adView = MainActivity.CreateAdRequest(this,
+				(LinearLayout) findViewById(R.id.adview));
+
 		m_input = (EditText) findViewById(R.id.editText1);
 		m_result = (EditText) findViewById(R.id.conver_result);
 		m_target = (Spinner) findViewById(R.id.spinner_target);
@@ -69,13 +72,6 @@ public class ConverterActivity extends Activity implements OnClickListener {
 			m_target.setSelection(settings.getInt("ConverTargetUnit", 5));
 			m_source.setSelection(settings.getInt("ConverSourceUnit", 6));
 		}
-		adView = new AdView(this, AdSize.BANNER, MainActivity.myAdID);
-		  LinearLayout layout = (LinearLayout)findViewById(R.id.adview);
-		  layout.addView(adView);
-		  AdRequest adRequest = new AdRequest();
-		  adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
-		  adRequest.addTestDevice("BA76119486D364D047D0C789B4F61E46");
-		  adView.loadAd(adRequest);
 	}
 
 	@Override

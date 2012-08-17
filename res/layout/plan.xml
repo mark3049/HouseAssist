@@ -51,24 +51,36 @@
         android:layout_height="2dp"
         android:background="#FF909090" />
 
-	<include
-	    android:id="@+id/linearLayout_grace"
-	    android:layout_width="wrap_content"
-	    layout="@layout/interest_period" />
+    <include
+        android:id="@+id/linearLayout_grace"
+        android:layout_width="wrap_content"
+        layout="@layout/interest_period" />
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:background="#FF909090" />
-	<include android:id="@+id/linearLayout_interest1" layout="@layout/interest_period"/>
+
+    <include
+        android:id="@+id/linearLayout_interest1"
+        layout="@layout/interest_period" />
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:background="#FF909090" />
-	<include android:id="@+id/linearLayout_interest2" layout="@layout/interest_period"/>
+
+    <include
+        android:id="@+id/linearLayout_interest2"
+        layout="@layout/interest_period" />
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:background="#FF909090" />
-	<include android:id="@+id/linearLayout_interest3" layout="@layout/interest_period"/>
+
+    <include
+        android:id="@+id/linearLayout_interest3"
+        layout="@layout/interest_period" />
+
 </LinearLayout>

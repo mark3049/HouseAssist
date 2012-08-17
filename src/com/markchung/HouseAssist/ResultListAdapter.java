@@ -112,6 +112,11 @@ public class ResultListAdapter extends BaseAdapter {
 			holder.interest.setText(m_nr.format(m_interest[i] + 0.5));
 			holder.payment.setText(m_nr.format(m_payment[i] + 0.5));
 		}
+		if((position&0x01) == 0){
+			convertView.setBackgroundResource(R.color.odd);
+		}else{
+			convertView.setBackgroundResource(R.color.even);
+		}
 
 		return convertView;
 	}

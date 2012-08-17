@@ -8,31 +8,27 @@
         android:id="@+id/item_index"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        />
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/item_principal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="right"
-        />
+        android:gravity="right" />
 
     <TextView
         android:id="@+id/item_interest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="right"
-        />
+        android:gravity="right" />
 
     <TextView
         android:id="@+id/item_payment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="right"
-        />
+        android:gravity="right" />
 
 </LinearLayout>

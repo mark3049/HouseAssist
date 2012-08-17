@@ -2,8 +2,6 @@ package com.markchung.HouseAssist;
 
 import java.text.NumberFormat;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
 import com.google.ads.AdView;
 
 import android.app.Activity;
@@ -34,6 +32,9 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_evaluate);
+		adView = MainActivity.CreateAdRequest(this,
+				(LinearLayout) findViewById(R.id.adview));
+
 		m_arce = (EditText) findViewById(R.id.eval_edit_area);
 		m_affiliated = (EditText) findViewById(R.id.eval_edit_affiliated);
 		m_unit_price = (EditText) findViewById(R.id.eval_edit_unit_price);
@@ -60,13 +61,6 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 			m_sel_unit_price.setChecked(true);
 		}
 
-		adView = new AdView(this, AdSize.BANNER, MainActivity.myAdID);
-		LinearLayout layout = (LinearLayout) findViewById(R.id.adview);
-		layout.addView(adView);
-		AdRequest adRequest = new AdRequest();
-		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
-		adRequest.addTestDevice("BA76119486D364D047D0C789B4F61E46");
-		adView.loadAd(adRequest);
 	}
 
 	@Override
