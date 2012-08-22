@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 
@@ -37,8 +38,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	private LoanPlan m_lastPlan;
 	private AdView adView;
 
-	static public final AdView CreateAdRequest(Activity activity,LinearLayout view) {
-		AdView adview = new AdView(activity,AdSize.BANNER, MainActivity.myAdID);
+	static public final AdView CreateAdRequest(Activity activity,
+			LinearLayout view) {
+		AdView adview = new AdView(activity, AdSize.BANNER, MainActivity.myAdID);
 		view.addView(adview);
 		AdRequest adRequest = new AdRequest();
 		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
@@ -52,7 +54,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		// Debug.startMethodTracing(TAG);
 		setContentView(R.layout.activity_main);
-		adView = CreateAdRequest(this,(LinearLayout) findViewById(R.id.adview));
+		adView = CreateAdRequest(this, (LinearLayout) findViewById(R.id.adview));
 
 		m_shortResult = (LinearLayout) this.findViewById(R.id.ResultListView);
 		m_shortResult.setVisibility(View.GONE);
@@ -221,7 +223,9 @@ public class MainActivity extends Activity implements OnClickListener {
 					.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 			// MainActivity.this.getWindow().setSoftInputMode(
 			// WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
+			Toast.makeText(MainActivity.this,
+					MainActivity.this.getString(R.string.msgCalculated),
+					Toast.LENGTH_SHORT).show();
 		}
 
 		@Override
@@ -232,6 +236,15 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	private ProgressDialog myDialog = null;
+
+	private void showError() {
+		InputMethodManager imm = ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE));
+		imm.hideSoftInputFromWindow(MainActivity.this.getCurrentFocus()
+				.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+		Toast.makeText(this, this.getString(R.string.msgEdit_field_isNull),
+				Toast.LENGTH_SHORT).show();
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -249,6 +262,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				myDialog.dismiss();
 				myDialog = null;
 				// myDialog.cancel();
+				showError();
 				return;
 			}
 			Plan plan = new Plan();
@@ -256,6 +270,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				myDialog.dismiss();
 				myDialog = null;
 				// myDialog.cancel();
+				showError();
 				return;
 			}
 			this.m_lastPlan = new LoanPlan(amount, plan);

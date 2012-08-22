@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 public class Activity_Evaluate extends Activity implements OnClickListener,
 		OnCheckedChangeListener {
@@ -29,6 +30,7 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 	RadioButton m_sel_amount;
 	private AdView adView;
 	ColorStateList defColor;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -102,7 +104,12 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 		nr.setMaximumFractionDigits(3);
 		try {
 			arce = getValue(this.m_arce);
-			affiliate = getValue(this.m_affiliated);
+			try {
+				affiliate = getValue(this.m_affiliated);
+			} catch (Exception e1) {
+				this.m_affiliated.setText("0");
+				affiliate = 0;
+			}
 			if (!m_sel_amount.isChecked()) {
 				unit_price = getValue(this.m_unit_price);
 				amount = affiliate + (unit_price * arce);
@@ -112,7 +119,11 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 				unit_price = (amount - affiliate) / arce;
 				m_unit_price.setText(nr.format(unit_price));
 			}
+			Toast.makeText(this, this.getString(R.string.msgCalculated),
+					Toast.LENGTH_SHORT).show();
 		} catch (Exception e) {
+			Toast.makeText(this, this.getString(R.string.msgEdit_field_isNull),
+					Toast.LENGTH_SHORT).show();
 			return;
 		}
 

@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import com.google.ads.*;
 
 public class ConverterActivity extends Activity implements OnClickListener {
@@ -106,7 +108,11 @@ public class ConverterActivity extends Activity implements OnClickListener {
 				mm = value * rate[i][j];
 			}
 			m_result.setText(NumberFormat.getNumberInstance().format(mm));
+			Toast.makeText(this, this.getString(R.string.msgCalculated),
+					Toast.LENGTH_SHORT).show();
 		} catch (Exception e) {
+			Toast.makeText(this, this.getString(R.string.msgEdit_field_isNull),
+					Toast.LENGTH_SHORT).show();
 			return;
 		}
 	}

@@ -67,4 +67,6 @@
     <string name="eval_affiliated">Auxiliary</string>
     <string name="eval_amount">Amount</string>
     <string name="eval_note">Amount = auxiliary + ( area x unit price)</string>
+    <string name="msgEdit_field_isNull">Please enter a correct value</string>
+    <string name="msgCalculated">Calculation success</string>
 </resources>
