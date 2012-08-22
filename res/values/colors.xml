@@ -4,4 +4,7 @@
     <color name="text">#000000</color>
     <color name="even">#D6D2CE</color>
     <color name="odd">#F8F6F1</color>
+    <color name="compass">#CCCCCC</color>
+    <color name="gradient_low">#D6D2CE</color>
+    <color name="gradient_hi">#F8F6F1</color>
 </resources>

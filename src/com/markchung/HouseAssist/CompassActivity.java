@@ -92,12 +92,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
 		if (event.sensor.getType() != Sensor.TYPE_ORIENTATION)
 			return;
 		float value = 360 - event.values[SensorManager.DATA_X];
-		if (value < 180) {
-			m_info_view.setText(Integer.toString((int) value));
-		} else {
-			m_info_view.setText(Integer.toString((int) (value - 360)));
-		}
-
+		m_info_view.setText(Integer.toString((int) value));
 		matrix.setRotate(value, m_bmp.getWidth() / 2, m_bmp.getHeight() / 2);
 		imageView.setImageMatrix(matrix);
 

@@ -62,11 +62,11 @@
     <string name="tab_loan">loan</string>
     <string name="tab_compass">Compass</string>
     <string name="tab_evaluate">evaluate</string>
-    <string name="eval_area">Area</string>
+    <string name="eval_area">Building area</string>
     <string name="eval_unit_price">Unit price</string>
-    <string name="eval_affiliated">Auxiliary</string>
+    <string name="eval_affiliated">Additional costs</string>
     <string name="eval_amount">Amount</string>
-    <string name="eval_note">Amount = auxiliary + ( area x unit price)</string>
+    <string name="eval_note">Amount = \n Additional costs  + (Building area x Unit price)</string>
     <string name="msgEdit_field_isNull">Please enter a correct value</string>
     <string name="msgCalculated">Calculation success</string>
 </resources>
