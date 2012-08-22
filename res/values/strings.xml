@@ -54,10 +54,10 @@
     <string name="result_goback">Back</string>
     <string name="dialog_title_wait">please wait</string>
     <string name="dialog_body_calcelate">busy&#8230;</string>
-    <string name="conver_source">source</string>
-    <string name="conver_source_unit">unit</string>
-    <string name="conver_target_unit">to</string>
-    <string name="conver_result">Result</string>
+    <string name="conver_source">Value </string>
+    <string name="conver_source_unit">Unit </string>
+    <string name="conver_target_unit">To </string>
+    <string name="conver_result">Result </string>
     <string name="tab_converter">converter</string>
     <string name="tab_loan">loan</string>
     <string name="tab_compass">Compass</string>
