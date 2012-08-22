@@ -43,8 +43,16 @@ public class Interest_period {
 	}
 	void setRatePlan(InterestItem plan){
 		checkbox.setChecked(plan.enable);
-		if(plan.rate>0) this.setRate(plan.rate);
-		if(plan.rate>0)this.setEnd(plan.end);
+		if(plan.rate>0){
+			this.setRate(plan.rate);
+		}else{
+			this.edit_rate.setText("");
+		}
+		if(plan.end>0){
+			this.setEnd(plan.end);
+		}else{
+			this.edit_end.setText("");
+		}
 	}
 
 	boolean isEnable() {
@@ -57,6 +65,9 @@ public class Interest_period {
 	EditText getBeginView(){
 		return edit_begin;
 	}
+	void setBegin(int value){
+		edit_begin.setText(Integer.toString(value));
+	}
 
 	void setEnd(int value) {
 		edit_end.setText(Integer.toString(value));
@@ -66,7 +77,7 @@ public class Interest_period {
 		return edit_end;
 	}
 
-	private int getEnd() throws NumberFormatException {
+	int getEnd() throws NumberFormatException {
 		try {
 			return Integer.parseInt(edit_end.getText().toString());
 		} catch (NumberFormatException e) {

@@ -44,7 +44,7 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 		m_interest1.getEndView().setOnFocusChangeListener(this);
 		m_interest2.getEndView().setOnFocusChangeListener(this);
 		m_grace.getBeginView().setText("0");
-		//m_interest3.getEndView().setOnFocusChangeListener(this);
+		// m_interest3.getEndView().setOnFocusChangeListener(this);
 		m_edit_period.setOnFocusChangeListener(this);
 	}
 
@@ -86,32 +86,28 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 	}
 
 	void setPlan(Plan plan) {
-		m_edit_period.setText(Integer.toString(plan.period));
+		if (plan.period > 0) {
+			m_edit_period.setText(Integer.toString(plan.period));
+		} else {
+			m_edit_period.setText("");
+		}
 		this.m_spinner_type.setSelection(plan.type);
 
 		this.m_grace.setRatePlan(plan.grace);
 		this.m_interest1.setRatePlan(plan.interest1);
 		this.m_interest2.setRatePlan(plan.interest2);
 		this.m_interest3.setRatePlan(plan.interest3);
-		int period = plan.period*12;
-		if(m_grace.isEnable()){
-			m_interest1.getBeginView().setText(Integer.toString(Math.min(plan.grace.end+1,period)));
+		if (plan.period > 0) {
+			updateBegin(plan.period * 12);
+			parsePeriod(plan.period * 12);
 		}
-		if(plan.interest2.enable){
-			m_interest2.getBeginView().setText(Integer.toString(Math.min(plan.interest1.end+1,period)));
-		}
-		if(plan.interest3.enable){
-			m_interest3.getBeginView().setText(Integer.toString(Math.min(plan.interest2.end+1,period)));
-		}
-		
+
 	}
 
 	@Override
 	public void onCheckedChanged(CompoundButton view, boolean isChecked) {
 		boolean enable;
-		/*if (view == m_interest1.getCheckBox()) {
-			m_interest1.UpdateVisibility();
-		} else*/ if (view == m_interest2.getCheckBox()) {
+		if (view == m_interest2.getCheckBox()) {
 			m_interest2.UpdateVisibility();
 			enable = m_interest2.isEnable();
 			if (!enable) {
@@ -120,11 +116,20 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 			m_interest3.getCheckBox().setEnabled(enable);
 		} else if (view == m_interest3.getCheckBox()) {
 			m_interest3.UpdateVisibility();
-			enable = m_interest3.isEnable();
 		} else if (view == m_grace.getCheckBox()) {
 			m_grace.UpdateVisibility();
-			enable = m_grace.isEnable();
 		}
+		try {
+			int period = getPeriod() * 12;
+			updateBegin(period);
+			// parsePeriod(period);
+		} catch (NumberFormatException e) {
+
+		}
+	}
+
+	private int getPeriod() {
+		return Integer.parseInt(m_edit_period.getText().toString());
 	}
 
 	@Override
@@ -151,7 +156,7 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 			} else if (v == this.m_interest2.getEndView()) {
 				endView = m_interest2.getEndView();
 				beginView = m_interest3.getBeginView();
-			}else{
+			} else {
 				return;
 			}
 			int end = Integer.parseInt(endView.getText().toString());
@@ -162,7 +167,29 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 		}
 	}
 
-	void parsePeriod(int period) {
+	void updateBegin(int period) {
+		try {
+			if (m_grace.isEnable()) {
+				m_grace.setBegin(0);
+				m_interest1.setBegin(m_grace.getEnd());
+			} else {
+				m_interest1.setBegin(0);
+			}
+			if (m_interest2.isEnable()) {
+				m_interest2
+						.setBegin(Math.min(m_interest1.getEnd() + 1, period));
+				if (m_interest3.isEnable()) {
+					m_interest3.setBegin(Math.min(m_interest2.getEnd() + 1,
+							period));
+				}
+			}
+
+		} catch (NumberFormatException e) {
+
+		}
+	}
+
+	private void parsePeriod(int period) {
 		if (this.m_interest3.isEnable()) {
 			m_interest3.setEnd(period);
 		} else if (this.m_interest2.isEnable()) {

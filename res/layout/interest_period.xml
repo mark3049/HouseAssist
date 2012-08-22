@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/tilde" />
-
+
         <EditText
             android:id="@+id/edit_end"
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             android:layout_weight="2"
             android:hint="@string/months_Hint"
             android:imeOptions="actionNext"
-            android:inputType="numberDecimal" />
+            android:inputType="number" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -38,7 +38,7 @@
     <string name="period_Hint">year</string>
     <string name="year">Year</string>
     <string name="loan_type">Mortgage type</string>
-    <string name="interest_period">rate %</string>
+    <string name="interest_period">Rate </string>
     <string name="number_zero">0</string>
     <string name="tilde">~</string>
     <string name="months_Hint"></string>
