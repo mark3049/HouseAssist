@@ -4,6 +4,7 @@ import com.markchung.HouseAssist.R;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TabHost;
 
@@ -44,7 +45,20 @@ public class MainTabActivity extends TabActivity {
                 .setIndicator(getString(R.string.tab_compass))                        
                 .setContent(intent);
         tabHost.addTab(spec);
-        
+        if (savedInstanceState == null) {
+        	SharedPreferences sets = getSharedPreferences(MainActivity.TAG, 0);
+        	int index = sets.getInt("TabIndex", 0);
+        	tabHost.setCurrentTab(index);
+        }        
+	}
+	@Override
+	protected void onStop() {
+		SharedPreferences settings = getSharedPreferences(MainActivity.TAG, 0);
+		SharedPreferences.Editor edit = settings.edit();
+		int index = tabHost.getCurrentTab();
+		edit.putInt("TabIndex", index);
+		edit.commit();
+		super.onStop();
 	}
 
 }
