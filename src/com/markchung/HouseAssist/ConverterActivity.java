@@ -5,6 +5,8 @@ import java.text.NumberFormat;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -115,6 +117,33 @@ public class ConverterActivity extends Activity implements OnClickListener {
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.option_conver, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		int tmp;
+		switch(id){
+		case R.id.menu_item_clear:
+			m_result.setText("");
+			m_input.setText("");
+			break;
+		case R.id.menu_item_swap:
+			tmp = m_target.getSelectedItemPosition();
+			m_target.setSelection(m_source.getSelectedItemPosition());
+			m_source.setSelection(tmp);
+			break;
+		case R.id.menu_item_calculate:
+			onClick(m_btn);
+			break;			
+		}
+		return true;
 	}
 
 }

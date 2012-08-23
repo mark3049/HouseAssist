@@ -71,5 +71,6 @@
     <string name="eval_note">總價 = 附屬建物 + ( 總面積 x 單位價格 )</string>
     <string name="msgEdit_field_isNull">請輸入正確的數值</string>
     <string name="msgCalculated">計算完成</string>
-    
+    <string name="menu_item_clean">清除</string>
+     <string name="menu_item_swap">單位交換</string>
 </resources>

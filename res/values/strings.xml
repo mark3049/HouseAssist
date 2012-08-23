@@ -69,4 +69,6 @@
     <string name="eval_note">Amount = \n Additional costs  + (Building area x Unit price)</string>
     <string name="msgEdit_field_isNull">Please enter a correct value</string>
     <string name="msgCalculated">Calculation success</string>
+    <string name="menu_item_clean">Clear</string>
+    <string name="menu_item_swap">Swap</string>
 </resources>

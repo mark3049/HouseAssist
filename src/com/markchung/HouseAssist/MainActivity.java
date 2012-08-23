@@ -13,6 +13,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -277,6 +279,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			new CalculateTask().execute(m_lastPlan);
 
 		} else if (v == m_result_clean) {
+			m_lastPlan = null;
 			ClearResult();
 		} else if (v == this.m_btn_detail) {
 			if (m_lastPlan == null)
@@ -288,6 +291,21 @@ public class MainActivity extends Activity implements OnClickListener {
 			intent.putExtras(b);
 			this.startActivity(intent);
 		}
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.option_menu, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == R.id.item_clear){
+			m_edit_amount.setText("");
+			ClearResult();
+			m_plan.setPlan(new Plan());			
+		}
+		return true;
 	}
 
 }

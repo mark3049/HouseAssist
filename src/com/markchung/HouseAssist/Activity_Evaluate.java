@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -148,5 +150,21 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 		}
 
 	}
-
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.option_menu, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId()==R.id.item_clear){
+			this.m_affiliated.setText("0");
+			this.m_amount.setText("");
+			this.m_unit_price.setText("");
+			this.m_arce.setText("");			
+		}
+		return true;
+	}
 }

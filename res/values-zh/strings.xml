@@ -73,4 +73,6 @@
     <string name="eval_note">总价 = 附属建物 + ( 总面积 x 单位价格 )</string>
     <string name="msgEdit_field_isNull">请输入正确的数值</string>
     <string name="msgCalculated">计算完成</string>
+    <string name="menu_item_clean">清除</string>
+    <string name="menu_item_swap">单位交换</string>
 </resources>

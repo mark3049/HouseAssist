@@ -59,7 +59,7 @@ public class Plan {
 		interest1 = new InterestItem();
 		interest2 = new InterestItem();
 		interest3 = new InterestItem();
-		period = 20;
+		period = -1;
 		type = 0;
 		interest1.enable = true;
 	}

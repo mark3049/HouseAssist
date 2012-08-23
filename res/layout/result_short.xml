@@ -6,13 +6,13 @@
     android:background="@layout/roundshape"
     android:orientation="vertical"
     android:padding="5dp" >
-
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/result_short_payment"
         android:textColor="@color/text" />
-
+
     <TextView
         android:id="@+id/resultshort_payment"
         android:layout_width="match_parent"
@@ -25,13 +25,13 @@
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:background="#FF909090" />
-
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/result_short_interest"
         android:textColor="@color/text" />
-
+
     <TextView
         android:id="@+id/resultshort_interest"
         android:layout_width="match_parent"
@@ -44,13 +44,13 @@
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:background="#FF909090" />
-
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/result_short_amount"
         android:textColor="@color/text" />
-
+
     <TextView
         android:id="@+id/resultshort_amount"
         android:layout_width="match_parent"
@@ -64,10 +64,24 @@
         android:layout_height="2dp"
         android:background="#FF909090" />
 
-    <Button
-        android:id="@+id/resultshort_button"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/result_short_button" />
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/resultshort_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/result_short_button" />
+
+        <Button
+            android:id="@+id/button_clean"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/clean" />
+    </LinearLayout>
 
 </LinearLayout>
