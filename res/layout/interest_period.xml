@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:hint="@string/percent"
+            android:hint="@string/rate_Hint"
             android:imeOptions="actionNext"
             android:inputType="numberDecimal" />
 
@@ -38,7 +38,7 @@
             android:enabled="false"
             android:focusable="false"
             android:gravity="center"
-            android:hint="@string/months_Hint"
+            android:inputType="none"
             />
 
         <TextView
