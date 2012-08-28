@@ -22,14 +22,14 @@ public class InterestItem{
 		b.putDouble(tag+"_rate", rate);
 		b.putInt(tag+"_end", end);		
 	}
-	static int ParseValue(String buf){
+	private static int ParseValue(String buf){
 		if(buf.length()!=0){
 			return Integer.parseInt(buf);
 		}else{
 			return -1;
 		}
 	}
-	static double ParseValueDouble(String buf){
+	private static double ParseValueDouble(String buf){
 		if(buf.length()!=0){
 			return Double.parseDouble(buf);
 		}else{

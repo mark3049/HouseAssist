@@ -3,6 +3,7 @@ package com.markchung.HouseAssist;
 import com.markchung.HouseAssist.R;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.widget.CompoundButton;
@@ -13,22 +14,22 @@ import android.widget.TextView;
 
 public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener {
 	private EditText m_edit_period;
-	private Interest_period m_grace;
-	private Interest_period m_interest1;
-	private Interest_period m_interest2;
-	private Interest_period m_interest3;
+	private InterestView m_grace;
+	private InterestView m_interest1;
+	private InterestView m_interest2;
+	private InterestView m_interest3;
 	private Spinner m_spinner_type;
 
 	PlanView(Context context, View view) {
 		m_edit_period = (EditText) view.findViewById(R.id.edit_period);
-		m_grace = new Interest_period(
+		m_grace = new InterestView(
 				view.findViewById(R.id.linearLayout_grace));
 
-		m_interest1 = new Interest_period(
+		m_interest1 = new InterestView(
 				view.findViewById(R.id.linearLayout_interest1));
-		m_interest2 = new Interest_period(
+		m_interest2 = new InterestView(
 				view.findViewById(R.id.linearLayout_interest2));
-		m_interest3 = new Interest_period(
+		m_interest3 = new InterestView(
 				view.findViewById(R.id.linearLayout_interest3));
 
 		m_spinner_type = (Spinner) view.findViewById(R.id.spinner_types);
@@ -46,6 +47,31 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 		m_grace.getBeginView().setText("0");
 		// m_interest3.getEndView().setOnFocusChangeListener(this);
 		m_edit_period.setOnFocusChangeListener(this);
+	}
+
+	public void Load(SharedPreferences settings) {
+		int period = settings.getInt("edit_period", -1);
+		if (period > 0) {
+			m_edit_period.setText(Integer.toString(period));
+		} else {
+			m_edit_period.setText("");
+		}
+		m_spinner_type.setSelection(settings.getInt("spinner_type", 0));
+		m_grace.Load(settings, "grace");
+		m_interest1.Load(settings, "interest1");
+		m_interest2.Load(settings, "interest2");
+		m_interest3.Load(settings, "interest3");
+		m_interest1.getCheckBox().setChecked(true);
+	}
+
+	public void Save(SharedPreferences.Editor edit) {
+		edit.putInt("edit_period",
+				InterestView.ParseValue(m_edit_period.getText().toString()));
+		edit.putInt("spinner_type", m_spinner_type.getSelectedItemPosition());
+		m_grace.Save(edit, "grace");
+		m_interest1.Save(edit, "interest1");
+		m_interest2.Save(edit, "interest2");
+		m_interest3.Save(edit, "interest3");
 	}
 
 	boolean GetPlan(Plan plan) {
@@ -75,7 +101,7 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 	}
 
 	void GetSavePaln(Plan plan) {
-		plan.period = InterestItem.ParseValue(m_edit_period.getText()
+		plan.period = InterestView.ParseValue(m_edit_period.getText()
 				.toString());
 		plan.type = m_spinner_type.getSelectedItemPosition();
 		m_grace.getSaveRatePlan(plan.grace);

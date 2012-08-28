@@ -80,27 +80,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			SharedPreferences settings = getSharedPreferences(TAG, 0);
 			m_edit_amount.setText(settings.getString("edit_amount", ""));
 			m_spinner_unit.setSelection(settings.getInt("spinner_unit", 0));
-
-			Plan plan = new Plan();
-			plan.period = settings.getInt("edit_period", 20);
-			plan.type = settings.getInt("spinner_type", 0);
-
-			plan.grace.enable = settings.getBoolean("grace", false);
-			plan.grace.rate = settings.getFloat("grace_rate", -1);
-			plan.grace.end = settings.getInt("grace_end", -1);
-
-			plan.interest1.rate = settings.getFloat("interest1_rate", -1);
-			plan.interest1.end = settings.getInt("interest1_end", -1);
-
-			plan.interest2.enable = settings.getBoolean("interest2", false);
-			plan.interest2.rate = settings.getFloat("interest2_rate", -1);
-			plan.interest2.end = settings.getInt("interest2_end", -1);
-
-			plan.interest3.enable = settings.getBoolean("interest3", false);
-			plan.interest3.rate = settings.getFloat("interest3_rate", -1);
-			plan.interest3.end = settings.getInt("interest3_end", -1);
-			plan.interest1.enable = true;
-			m_plan.setPlan(plan);
+			m_plan.Load(settings);
 		}
 	}
 
@@ -112,31 +92,11 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onStop() {
-		Plan plan = new Plan();
-
-		m_plan.GetSavePaln(plan);
 		SharedPreferences settings = getSharedPreferences(TAG, 0);
 		SharedPreferences.Editor edit = settings.edit();
-
 		edit.putString("edit_amount", m_edit_amount.getText().toString());
 		edit.putInt("spinner_unit", m_spinner_unit.getSelectedItemPosition());
-		edit.putInt("edit_period", plan.period);
-		edit.putInt("spinner_type", plan.type);
-
-		edit.putBoolean("grace", plan.grace.enable);
-		edit.putFloat("grace_rate", (float) plan.grace.rate);
-		edit.putInt("grace_end", plan.grace.end);
-
-		edit.putFloat("interest1_rate", (float) plan.interest1.rate);
-		edit.putInt("interest1_end", plan.interest1.end);
-
-		edit.putBoolean("interest2", plan.interest2.enable);
-		edit.putFloat("interest2_rate", (float) plan.interest2.rate);
-		edit.putInt("interest2_end", plan.interest2.end);
-
-		edit.putBoolean("interest3", plan.interest3.enable);
-		edit.putFloat("interest3_rate", (float) plan.interest3.rate);
-		edit.putInt("interest3_end", plan.interest3.end);
+		m_plan.Save(edit);
 		edit.commit();
 		// Debug.stopMethodTracing();
 		super.onStop();
