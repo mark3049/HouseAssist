@@ -4,5 +4,11 @@
     <item
         android:id="@+id/menu_item_clear"
         android:title="@string/menu_item_clean"/>
+    <item
+        android:id="@+id/menu_item_sendmail"
+        android:title="@string/menu_item_sendmail"/>
+    <item
+        android:id="@+id/menu_item_sendexcel"
+        android:title="@string/menu_item_sendexcel"/>
 
 </menu>

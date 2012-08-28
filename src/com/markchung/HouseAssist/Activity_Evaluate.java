@@ -159,7 +159,7 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if(item.getItemId()==R.id.item_clear){
+		if(item.getItemId()==R.id.menu_item_clear){
 			this.m_affiliated.setText("0");
 			this.m_amount.setText("");
 			this.m_unit_price.setText("");

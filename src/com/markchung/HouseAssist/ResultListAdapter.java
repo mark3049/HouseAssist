@@ -86,7 +86,7 @@ public class ResultListAdapter extends BaseAdapter {
 		} else {
 			int i = position;
 			holder.index.setText(Integer.toString(position+1));
-			holder.principal.setText(m_nr.format(result.getPayment(i) + 0.5));
+			holder.principal.setText(m_nr.format(result.getPrincipal(i) + 0.5));
 			holder.interest.setText(m_nr.format(result.getInterest(i) + 0.5));
 			holder.payment.setText(m_nr.format(result.getPayment(i) + 0.5));
 		}

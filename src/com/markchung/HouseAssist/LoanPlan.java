@@ -13,7 +13,7 @@ public class LoanPlan {
 	InterestItem interest1;
 	InterestItem interest2;
 	InterestItem interest3;
-	Schedule m_lastResult;
+	private Schedule m_lastResult;
 	
 	public void putBundle(Bundle b){
 		b.putInt("Amount",this.m_amount);
@@ -43,6 +43,12 @@ public class LoanPlan {
 		period = -1;
 		loan_type = 0;
 		interest1.setEnable(true);		
+	}
+	Schedule getSchedule(){
+		if(m_lastResult==null){
+			return calculate();
+		}
+		return m_lastResult;
 	}
 	public Schedule calculate(){
 		double [] payment = new double[period*12];

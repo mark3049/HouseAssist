@@ -1,5 +1,7 @@
 package com.markchung.HouseAssist;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.NumberFormat;
 
 import com.google.ads.AdRequest;
@@ -8,12 +10,15 @@ import com.google.ads.AdView;
 import com.markchung.HouseAssist.R;
 import com.markchung.HouseAssist.Plan.Schedule;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -191,17 +196,64 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.option_menu, menu);
+		getMenuInflater().inflate(R.menu.option_main, menu);
 		return true;
 	}
-	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if(item.getItemId() == R.id.item_clear){
-			ClearResult();
-			m_plan.CleanForm();			
-		}
+	public boolean onMenuOpened(int featureId, Menu menu){
+		boolean flag =this.m_lastPlan!=null;
+		
+		menu.findItem(R.id.menu_item_sendmail).setEnabled(flag);
+		menu.findItem(R.id.menu_item_sendexcel).setEnabled(flag);
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		switch(id){
+		case R.id.menu_item_clear:
+			ClearResult();
+			m_plan.CleanForm();
+			break;
+		case R.id.menu_item_sendmail:
+			sendToMail();
+			break;
+		case R.id.menu_item_sendexcel:
+			sendToExcel();
+			break;
+		}
+		return true;
+	}
+	private void sendToMail(){
+		Resources resources = this.getResources();
+        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("text/text");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.app_name) + " - export");
+        StringBuilder sb = new StringBuilder();
+        new ScheduleExport(resources,this.m_lastPlan).append(sb);
+        emailIntent.putExtra(Intent.EXTRA_TEXT, sb.toString());
+        startActivity(Intent.createChooser(emailIntent, resources.getString(R.string.sendEmail)));		
+	}
+	private void sendToExcel(){
+        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        try {
+        	File file = createTmpFile();
+        	new ScheduleExport(this.getResources(),this.m_lastPlan).save(file);
+	        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+	        emailIntent.setType("text/csv");
+	        startActivity(Intent.createChooser(emailIntent, this.getResources().getString(R.string.sendExcel)));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private static File createTmpFile() throws IOException {
+        String fileName = "HosingAssist.csv";//csvScheduleCreator.getFileName();
+        File externalStorageDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        File file = new File(externalStorageDirectory, fileName);
+        file.deleteOnExit();
+        return file;
+    }
 }

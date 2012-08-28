@@ -73,5 +73,8 @@
     <string name="msgCalculated">Calculated success</string>
     <string name="menu_item_clean">Clear</string>
     <string name="menu_item_swap">Swap</string>
-
+	<string name="menu_item_sendmail">Export to Eail</string>
+	<string name="menu_item_sendexcel">Export to Excel</string>
+	<string name="sendEmail">Send E-mail</string>
+	<string name="sendExcel">Send Excel</string>
 </resources>
