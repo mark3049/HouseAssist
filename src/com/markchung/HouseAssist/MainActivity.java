@@ -6,6 +6,7 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
 import com.markchung.HouseAssist.R;
+import com.markchung.HouseAssist.Plan.Schedule;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,9 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +30,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button m_Calculate;
 	private Button m_result_clean;
 	private Button m_btn_detail;
-	private EditText m_edit_amount;
-	private Spinner m_spinner_unit;
+	//private EditText m_edit_amount;
+	//private Spinner m_spinner_unit;
 	public static final String TAG = "HouseAssist";
 	public static final String myAdID = "a1502374da40dc1";
 	public static final String myTestDevice = "BA76119486D364D047D0C789B4F61E46";
@@ -66,11 +65,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		m_btn_detail = (Button) m_shortResult
 				.findViewById(R.id.resultshort_button);
 
-		m_plan = new PlanView(this, findViewById(R.id.main_plan));
+		m_plan = new PlanView(this, findViewById(R.id.loanPlanView));
 
-		m_edit_amount = (EditText) findViewById(R.id.edit_amount);
-
-		m_spinner_unit = (Spinner) findViewById(R.id.spinner_unit);
 
 		m_Calculate.setOnClickListener(this);
 		m_result_clean.setOnClickListener(this);
@@ -78,8 +74,6 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		if (savedInstanceState == null) {
 			SharedPreferences settings = getSharedPreferences(TAG, 0);
-			m_edit_amount.setText(settings.getString("edit_amount", ""));
-			m_spinner_unit.setSelection(settings.getInt("spinner_unit", 0));
 			m_plan.Load(settings);
 		}
 	}
@@ -94,8 +88,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onStop() {
 		SharedPreferences settings = getSharedPreferences(TAG, 0);
 		SharedPreferences.Editor edit = settings.edit();
-		edit.putString("edit_amount", m_edit_amount.getText().toString());
-		edit.putInt("spinner_unit", m_spinner_unit.getSelectedItemPosition());
 		m_plan.Save(edit);
 		edit.commit();
 		// Debug.stopMethodTracing();
@@ -105,74 +97,28 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	private void InsertResult(Schedule result) {
 		m_shortResult.setVisibility(View.VISIBLE);
-		int i;
-		double maxPay, minPay, interest, amount;
-		maxPay = Double.MIN_VALUE;
-		minPay = Double.MAX_VALUE;
-		amount = 0;
-		double[] t = result.payment;
-		int len = t.length;
-		for (i = 0; i < len; ++i) {
-			maxPay = Math.max(maxPay, t[i]);
-			minPay = Math.min(minPay, t[i]);
-			amount += t[i];
-		}
-		t = result.interest;
-		interest = 0;
-		for (i = 0; i < len; ++i) {
-			interest += t[i];
-		}
 		NumberFormat nr = NumberFormat.getNumberInstance();
 		nr.setParseIntegerOnly(true);
 		nr.setMaximumFractionDigits(0);
 		TextView view = (TextView) m_shortResult
 				.findViewById(R.id.resultshort_payment);
-		if ((maxPay - minPay) < 1) {
-			view.setText(nr.format(maxPay + 0.5));
+		if ((result.getMaxPay() - result.getMinPay()) < 1) {
+			view.setText(nr.format(result.getMaxPay() + 0.5));
 		} else {
-			view.setText(String.format("%s - %s", nr.format(maxPay + 0.5),
-					nr.format(minPay + 0.5)));
+			view.setText(String.format("%s - %s", nr.format(result.getMaxPay() + 0.5),
+					nr.format(result.getMinPay() + 0.5)));
 		}
 		view = (TextView) m_shortResult.findViewById(R.id.resultshort_amount);
-		view.setText(nr.format(amount + 0.5));
+		view.setText(nr.format(result.getPayments() + 0.5));
 		view = (TextView) m_shortResult.findViewById(R.id.resultshort_interest);
-		view.setText(nr.format(interest + 0.5));
+		view.setText(nr.format(result.getInterests() + 0.5));
 	}
 
 	private void ClearResult() {
+		m_lastPlan = null;
 		m_shortResult.setVisibility(View.GONE);
 	}
 
-	/*
-	 * @Override public boolean onCreateOptionsMenu(Menu menu) {
-	 * getMenuInflater().inflate(R.menu.activity_main, menu); return true; }
-	 */
-	private int getAmount() {
-		int unit = m_spinner_unit.getSelectedItemPosition();
-		double amount = 0;
-		try {
-			amount = Double.parseDouble(m_edit_amount.getText().toString());
-			if (amount <= 0) {
-				m_edit_amount.requestFocus();
-				return -1;
-			}
-		} catch (NumberFormatException ex) {
-			m_edit_amount.requestFocus();
-			return -1;
-		}
-		if (unit == 1) {
-			amount *= 1000;
-		} else if (unit == 2) {
-			amount *= 10000;
-		} else if (unit == 3) {
-			amount *= 1000000;
-		}
-		return (int) (amount + 0.5);
-	}
-
-	// private boolean fill_plan(Plan plan){
-	// return false;
-	// }
 	private class CalculateTask extends AsyncTask<LoanPlan, Void, Schedule> {
 
 		@Override
@@ -219,15 +165,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			myDialog = ProgressDialog.show(this, title, message, true, true);
 			ClearResult();
 
-			int amount = getAmount();
-			if (amount <= 0) {
-				myDialog.dismiss();
-				myDialog = null;
-				// myDialog.cancel();
-				showError();
-				return;
-			}
-			Plan plan = new Plan();
+			LoanPlan plan = new LoanPlan();
 			if (!m_plan.GetPlan(plan)) {
 				myDialog.dismiss();
 				myDialog = null;
@@ -235,11 +173,10 @@ public class MainActivity extends Activity implements OnClickListener {
 				showError();
 				return;
 			}
-			this.m_lastPlan = new LoanPlan(amount, plan);
+			this.m_lastPlan = plan;
 			new CalculateTask().execute(m_lastPlan);
 
 		} else if (v == m_result_clean) {
-			m_lastPlan = null;
 			ClearResult();
 		} else if (v == this.m_btn_detail) {
 			if (m_lastPlan == null)
@@ -261,9 +198,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == R.id.item_clear){
-			m_edit_amount.setText("");
 			ClearResult();
-			m_plan.setPlan(new Plan());			
+			m_plan.CleanForm();			
 		}
 		return true;
 	}

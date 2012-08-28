@@ -1,41 +1,105 @@
 package com.markchung.HouseAssist;
 
+import com.markchung.HouseAssist.Plan.InterestItem;
+import com.markchung.HouseAssist.Plan.Schedule;
+
 import android.os.Bundle;
 
 public class LoanPlan {
-	private int m_amount;
-	private Plan m_plan;
-
+	int m_amount;
+	int period;
+	int loan_type;
+	InterestItem grace;
+	InterestItem interest1;
+	InterestItem interest2;
+	InterestItem interest3;
+	Schedule m_lastResult;
+	
 	public void putBundle(Bundle b){
 		b.putInt("Amount",this.m_amount);
-		this.m_plan.putBundle(b);
+		b.putInt("Period", this.period);
+		b.putInt("Type",this.loan_type);
+		this.grace.putBundle("Grace", b);
+		interest1.putBundle("IRate1", b);
+		interest2.putBundle("IRate2", b);
+		interest3.putBundle("IRate3", b);		
+
 	}
 	public LoanPlan(Bundle b){
 		m_amount = b.getInt("Amount");
-		m_plan = new Plan(b);
+		period = b.getInt("Period");
+		loan_type = b.getInt("Type");
+		grace = new InterestItem("Grace",b);
+		interest1 = new InterestItem("IRate1", b);
+		interest2 = new InterestItem("IRate2", b);
+		interest3 = new InterestItem("IRate3", b);
 	}
-
-	LoanPlan(int amount,Plan plan){
-		m_plan = plan;
-		m_amount = amount;
+	public LoanPlan(){
+		grace = new InterestItem();
+		interest1 = new InterestItem();
+		interest2 = new InterestItem();
+		interest3 = new InterestItem();
+		m_amount = -1;
+		period = -1;
+		loan_type = 0;
+		interest1.setEnable(true);		
 	}
 	public Schedule calculate(){
-		return calculate(m_amount, m_plan);
-	}
-	public static Schedule calculate(int amount,Plan plan){
-		Schedule result;
-		double [] payment = new double[plan.period*12];
-		double [] interest = new double[plan.period*12];
-		double [] principal = new double [plan.period*12];
-		double [] rates = plan.Interests();
-		if(plan.type==0){
-			doAmortization(amount,payment,interest,principal,rates,plan.getGrace());
+		double [] payment = new double[period*12];
+		double [] interest = new double[period*12];
+		double [] principal = new double [period*12];
+		double [] rates = Interests();
+		if(loan_type==0){
+			doAmortization(m_amount,payment,interest,principal,rates,getGrace());
 		}else{
-			doLinear(amount,payment,interest,principal,rates,plan.getGrace());
+			doLinear(m_amount,payment,interest,principal,rates,getGrace());
 		}
-		result = new Schedule(principal,interest,payment);
-		return result;
+		m_lastResult = new Schedule(principal,interest,payment);
+		return m_lastResult;
 	}
+	private int getGrace(){
+		if(!grace.isEnable()) return 0;
+		else return grace.getEnd();
+	}
+	private double [] Interests(){
+		int period_m = period*12; 
+		double [] interests = new double[period_m];
+		//
+		// 利率
+		int index = 0;
+		int end;
+		double rate;
+		if (grace.isEnable()) {
+			end = grace.getEnd();
+			rate = grace.getRate();
+			for (; index < end && index < period_m; ++index) {
+				interests[index] = rate;
+			}
+		}
+		end = interest1.getEnd();
+		rate = interest1.getRate();
+		for (; index < end && index < period_m; ++index) {
+			interests[index] = rate;
+		}
+		if (interest2.isEnable()) {
+			end = interest2.getEnd();
+			rate = interest2.getRate();
+			for (; index < end && index < period_m; ++index) {
+				interests[index] = rate;
+			}
+			if (interest3.isEnable()) {
+				end = interest3.getEnd();
+				rate = interest3.getRate();
+				for (; index < period_m; ++index) {
+					interests[index] = rate;
+				}
+			}
+		}
+		for (; index < period_m; ++index) {
+			interests[index] = rate;
+		}		
+		return interests;
+	}	
 	/**
 	 * PMT 公式
 	 * @param rate 年利率

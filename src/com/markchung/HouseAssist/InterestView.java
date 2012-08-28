@@ -3,6 +3,7 @@ package com.markchung.HouseAssist;
 import java.text.NumberFormat;
 
 import com.markchung.HouseAssist.R;
+import com.markchung.HouseAssist.Plan.InterestItem;
 
 import android.content.SharedPreferences;
 import android.view.View;
@@ -34,37 +35,32 @@ public class InterestView {
 		setRate(settings.getFloat(tag + "_rate", -1));
 		setEnd(settings.getInt(tag + "_end", -1));
 	}
-	public void Save(SharedPreferences.Editor edit,String tag)
-	{
+
+	public void Save(SharedPreferences.Editor edit, String tag) {
 		edit.putBoolean(tag, checkbox.isChecked());
-		edit.putFloat(tag+"_rate", ParseValueFloat(edit_rate.getText().toString()));
-		edit.putInt(tag+"_end", ParseValue(edit_end.getText().toString()));		
-	}
-	
-	void getRatePlan(InterestItem t) throws NumberFormatException {
-		t.enable = isEnable();
-		if (t.enable) {
-			t.rate = this.getRate();
-			// t.begin = this.getBegin();
-			t.end = this.getEnd();
-		}
+		edit.putFloat(tag + "_rate", ParseValueFloat(edit_rate.getText()
+				.toString()));
+		edit.putInt(tag + "_end", ParseValue(edit_end.getText().toString()));
 	}
 
-	void getSaveRatePlan(InterestItem t) {
-		t.enable = checkbox.isChecked();
-		t.rate = ParseValueDouble(edit_rate.getText().toString());
-		t.end = ParseValue(edit_end.getText().toString());
+	void getRatePlan(InterestItem t) throws NumberFormatException {
+		t.setEnable(isEnable());
+		if (t.isEnable()) {
+			t.setRate(this.getRate());
+			// t.begin = this.getBegin();
+			t.setEnd(this.getEnd());
+		}
 	}
 
 	void setRatePlan(InterestItem plan) {
-		checkbox.setChecked(plan.enable);
-		if (plan.rate > 0) {
-			this.setRate(plan.rate);
+		checkbox.setChecked(plan.isEnable());
+		if (plan.getRate() > 0) {
+			this.setRate(plan.getRate());
 		} else {
 			this.edit_rate.setText("");
 		}
-		if (plan.end > 0) {
-			this.setEnd(plan.end);
+		if (plan.getEnd() > 0) {
+			this.setEnd(plan.getEnd());
 		} else {
 			this.edit_end.setText("");
 		}
@@ -83,13 +79,17 @@ public class InterestView {
 	}
 
 	void setBegin(int value) {
-		edit_begin.setText(Integer.toString(value));
+		if (value >= 0) {
+			edit_begin.setText(Integer.toString(value));
+		} else {
+			edit_begin.setText("");
+		}
 	}
 
 	void setEnd(int value) {
-		if(value>0){
-		edit_end.setText(Integer.toString(value));
-		}else{
+		if (value > 0) {
+			edit_end.setText(Integer.toString(value));
+		} else {
 			edit_end.setText("");
 		}
 	}
@@ -134,24 +134,27 @@ public class InterestView {
 			mView.setVisibility(View.GONE);
 		}
 	}
-	static int ParseValue(String buf){
-		if(buf.length()!=0){
+
+	static int ParseValue(String buf) {
+		if (buf.length() != 0) {
 			return Integer.parseInt(buf);
-		}else{
+		} else {
 			return -1;
 		}
 	}
-	static double ParseValueDouble(String buf){
-		if(buf.length()!=0){
+
+	static double ParseValueDouble(String buf) {
+		if (buf.length() != 0) {
 			return Double.parseDouble(buf);
-		}else{
+		} else {
 			return -1;
 		}
 	}
-	static float ParseValueFloat(String buf){
-		if(buf.length()!=0){
+
+	static float ParseValueFloat(String buf) {
+		if (buf.length() != 0) {
 			return Float.parseFloat(buf);
-		}else{
+		} else {
 			return -1;
 		}
 	}

@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener {
+	private EditText m_edit_amount;
+	private Spinner m_spinner_unit;
 	private EditText m_edit_period;
 	private InterestView m_grace;
 	private InterestView m_interest1;
@@ -21,6 +23,11 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 	private Spinner m_spinner_type;
 
 	PlanView(Context context, View view) {
+		m_edit_amount = (EditText) view.findViewById(R.id.edit_amount);
+
+		m_spinner_unit = (Spinner) view.findViewById(R.id.spinner_unit);
+		view = view.findViewById(R.id.main_plan);
+
 		m_edit_period = (EditText) view.findViewById(R.id.edit_period);
 		m_grace = new InterestView(
 				view.findViewById(R.id.linearLayout_grace));
@@ -50,6 +57,9 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 	}
 
 	public void Load(SharedPreferences settings) {
+		m_edit_amount.setText(settings.getString("edit_amount", ""));
+		m_spinner_unit.setSelection(settings.getInt("spinner_unit", 0));
+
 		int period = settings.getInt("edit_period", -1);
 		if (period > 0) {
 			m_edit_period.setText(Integer.toString(period));
@@ -62,9 +72,17 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 		m_interest2.Load(settings, "interest2");
 		m_interest3.Load(settings, "interest3");
 		m_interest1.getCheckBox().setChecked(true);
+		if (period > 0) {
+			updateBegin(period * 12);
+			parsePeriod(period * 12);
+		}
+		
 	}
 
 	public void Save(SharedPreferences.Editor edit) {
+		edit.putString("edit_amount", m_edit_amount.getText().toString());
+		edit.putInt("spinner_unit", m_spinner_unit.getSelectedItemPosition());
+
 		edit.putInt("edit_period",
 				InterestView.ParseValue(m_edit_period.getText().toString()));
 		edit.putInt("spinner_type", m_spinner_type.getSelectedItemPosition());
@@ -73,8 +91,33 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 		m_interest2.Save(edit, "interest2");
 		m_interest3.Save(edit, "interest3");
 	}
+	public int getAmount() {
+		int unit = m_spinner_unit.getSelectedItemPosition();
+		double amount = 0;
+		try {
+			amount = Double.parseDouble(m_edit_amount.getText().toString());
+			if (amount <= 0) {
+				m_edit_amount.requestFocus();
+				return -1;
+			}
+		} catch (NumberFormatException ex) {
+			m_edit_amount.requestFocus();
+			return -1;
+		}
+		if (unit == 1) {
+			amount *= 1000;
+		} else if (unit == 2) {
+			amount *= 10000;
+		} else if (unit == 3) {
+			amount *= 1000000;
+		}
+		return (int) (amount + 0.5);
+	}
 
-	boolean GetPlan(Plan plan) {
+	boolean GetPlan(LoanPlan plan) {
+		plan.m_amount = this.getAmount();
+		if(plan.m_amount<0) return false;
+
 		// ¶U´Ú´Á­­
 		try {
 			plan.period = Integer.parseInt(m_edit_period.getText().toString());
@@ -87,7 +130,7 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 			return false;
 		}
 		// plan.period *= 12;
-		plan.type = this.m_spinner_type.getSelectedItemPosition();
+		plan.loan_type = this.m_spinner_type.getSelectedItemPosition();
 		try {
 			m_grace.getRatePlan(plan.grace);
 			m_interest1.getRatePlan(plan.interest1);
@@ -100,34 +143,23 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 		return true;
 	}
 
-	void GetSavePaln(Plan plan) {
-		plan.period = InterestView.ParseValue(m_edit_period.getText()
-				.toString());
-		plan.type = m_spinner_type.getSelectedItemPosition();
-		m_grace.getSaveRatePlan(plan.grace);
-		m_interest1.getSaveRatePlan(plan.interest1);
-		m_interest2.getSaveRatePlan(plan.interest2);
-		m_interest3.getSaveRatePlan(plan.interest3);
-		// return plan;
-	}
-
-	void setPlan(Plan plan) {
+	public void CleanForm() {
+		LoanPlan plan = new LoanPlan();
 		if (plan.period > 0) {
 			m_edit_period.setText(Integer.toString(plan.period));
 		} else {
 			m_edit_period.setText("");
 		}
-		this.m_spinner_type.setSelection(plan.type);
+		this.m_spinner_type.setSelection(plan.loan_type);
 
 		this.m_grace.setRatePlan(plan.grace);
 		this.m_interest1.setRatePlan(plan.interest1);
 		this.m_interest2.setRatePlan(plan.interest2);
 		this.m_interest3.setRatePlan(plan.interest3);
-		if (plan.period > 0) {
-			updateBegin(plan.period * 12);
-			parsePeriod(plan.period * 12);
-		}
-
+		m_grace.setBegin(-1);
+		m_interest1.setBegin(-1);
+		m_interest2.setBegin(-1);
+		m_interest3.setBegin(-1);
 	}
 
 	@Override
