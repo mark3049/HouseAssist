@@ -51,36 +51,86 @@
         android:layout_height="2dp"
         android:background="#FF909090" />
 
-    <include
-        android:id="@+id/linearLayout_grace"
-        android:layout_width="wrap_content"
-        layout="@layout/interest_period" />
-
-    <View
+    <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#FF909090" />
+        android:layout_height="wrap_content" >
 
-    <include
-        android:id="@+id/linearLayout_interest1"
-        layout="@layout/interest_period" />
+        <TableRow android:id="@+id/linearLayout_grace" >
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#FF909090" />
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grace_period" />
 
-    <include
-        android:id="@+id/linearLayout_interest2"
-        layout="@layout/interest_period" />
+            <include
+                android:id="@+id/onoff_view"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                layout="@layout/period" />
+        </TableRow>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#FF909090" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#FF909090" />
 
-    <include
-        android:id="@+id/linearLayout_interest3"
-        layout="@layout/interest_period" />
+        <TableRow android:id="@+id/linearLayout_interest1" >
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:enabled="false"
+                android:text="@string/interest_period" />
+
+            <include
+                android:id="@+id/onoff_view"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                layout="@layout/period" />
+        </TableRow>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#FF909090" />
+
+        <TableRow android:id="@+id/linearLayout_interest2" >
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/interest_period" />
+
+            <include
+                android:id="@+id/onoff_view"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                layout="@layout/period" />
+        </TableRow>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#FF909090" />
+
+        <TableRow android:id="@+id/linearLayout_interest3" >
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/interest_period" />
+
+            <include
+                android:id="@+id/onoff_view"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                layout="@layout/period" />
+        </TableRow>
+    </TableLayout>
 
 </LinearLayout>

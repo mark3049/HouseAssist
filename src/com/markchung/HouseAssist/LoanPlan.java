@@ -30,19 +30,19 @@ public class LoanPlan {
 		period = b.getInt("Period");
 		loan_type = b.getInt("Type");
 		grace = new InterestItem("Grace",b);
-		interest1 = new InterestItem("IRate1", b);
+		interest1 = new InterestItem("IRate1", b,true);
 		interest2 = new InterestItem("IRate2", b);
 		interest3 = new InterestItem("IRate3", b);
 	}
 	public LoanPlan(){
 		grace = new InterestItem();
-		interest1 = new InterestItem();
+		interest1 = new InterestItem(true);
 		interest2 = new InterestItem();
 		interest3 = new InterestItem();
 		m_amount = -1;
 		period = -1;
 		loan_type = 0;
-		interest1.setEnable(true);		
+		//interest1.setEnable(true);		
 	}
 	Schedule getSchedule(){
 		if(m_lastResult==null){

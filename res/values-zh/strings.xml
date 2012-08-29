@@ -49,7 +49,7 @@
     <string name="month">月</string>
     <string name="percent">%</string>
     <string name="rate_Hint">年利率</string>
-    <string name="grace_period">本金宽限期</string>
+    <string name="grace_period">宽限期</string>
     <string name="calculate">计算</string>
     <string name="clean">清除计算结果</string>
     <string name="result_nr">期别</string>

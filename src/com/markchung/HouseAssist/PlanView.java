@@ -40,9 +40,9 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 				view.findViewById(R.id.linearLayout_interest3));
 
 		m_spinner_type = (Spinner) view.findViewById(R.id.spinner_types);
-		m_interest1.getCheckBox().setChecked(true);
-		m_interest1.getCheckBox().setEnabled(false);
-		m_grace.getCheckBox().setText(context.getString(R.string.grace_period));
+		//m_interest1.getCheckBox().setChecked(true);
+		//m_interest1.getCheckBox().setEnabled(false);
+		//m_grace.getCheckBox().setText(context.getString(R.string.grace_period));
 
 		m_grace.getCheckBox().setOnCheckedChangeListener(this);
 		m_interest1.getCheckBox().setOnCheckedChangeListener(this);
@@ -51,7 +51,7 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 		m_grace.getEndView().setOnFocusChangeListener(this);
 		m_interest1.getEndView().setOnFocusChangeListener(this);
 		m_interest2.getEndView().setOnFocusChangeListener(this);
-		m_grace.getBeginView().setText("0");
+		//m_grace.getBeginView().setText("0");
 		// m_interest3.getEndView().setOnFocusChangeListener(this);
 		m_edit_period.setOnFocusChangeListener(this);
 	}
