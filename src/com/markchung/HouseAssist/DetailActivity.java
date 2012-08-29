@@ -5,6 +5,7 @@ import com.markchung.HouseAssist.Plan.Schedule;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +34,11 @@ public class DetailActivity extends Activity implements OnItemSelectedListener  
 		fill_title(m_title);
 		m_view = (ListView) this.findViewById(R.id.activity_detail_list);
 		m_type = (Spinner) findViewById(R.id.detail_type);
+		if (savedInstanceState == null) {
+			SharedPreferences settings = getSharedPreferences(MainActivity.TAG,
+					0);
+			m_type.setSelection(settings.getInt("detail_type", 0));
+		}
 		m_lastType = m_type.getSelectedItemPosition();
 		Bundle extras = this.getIntent().getExtras();
 		if(extras!=null){
@@ -53,6 +59,14 @@ public class DetailActivity extends Activity implements OnItemSelectedListener  
 		//ResultListAdapter adapter = new ResultListAdapter(this,null);
 		//view.setAdapter(adapter);
 	}
+	@Override
+	protected void onStop() {
+		SharedPreferences settings = getSharedPreferences(MainActivity.TAG, 0);
+		SharedPreferences.Editor edit = settings.edit();
+		edit.putInt("detail_type", m_type.getSelectedItemPosition());
+		edit.commit();
+		super.onStop();
+	}	
 	private void doUpdateList(){
 		CharSequence title = this.getString(R.string.dialog_title_wait);
 		CharSequence message = getString(R.string.dialog_body_calcelate);

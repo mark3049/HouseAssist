@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="compass_direction">
+        <item>北</item>
+        <item>東北</item>
+        <item>東</item>
+        <item>東南</item>
+        <item>南</item>
+        <item>西南</item>
+        <item>西</item>
+        <item>西北</item>
+    </string-array>
     <string-array name="unit_types">
         <item></item>
         <item>千</item>
@@ -76,10 +86,10 @@
     <string name="msgCalculated">計算完成</string>
     <string name="menu_item_clean">清除</string>
     <string name="menu_item_swap">單位交換</string>
-	<string name="menu_item_sendmail">Email 匯出</string>
-	<string name="menu_item_sendexcel">Excel 匯出</string>
-	<string name="sendEmail">傳送電子郵件</string>
-	<string name="sendExcel">傳送Excel檔案</string>
-	<string name="export">匯出</string>
-    
+    <string name="menu_item_sendmail">Email 匯出</string>
+    <string name="menu_item_sendexcel">Excel 匯出</string>
+    <string name="sendEmail">傳送電子郵件</string>
+    <string name="sendExcel">傳送Excel檔案</string>
+    <string name="export">匯出</string>
+
 </resources>

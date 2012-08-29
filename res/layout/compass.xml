@@ -17,7 +17,7 @@
         android:layout_gravity="center"
         android:gravity="center_horizontal"
         android:textColor="@color/result"
-        android:background="@color/gradient_low"
+        android:textSize="24dp"
         android:text="@string/number_zero" />
 
     <LinearLayout

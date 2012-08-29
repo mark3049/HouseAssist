@@ -1,5 +1,14 @@
 <resources>
-
+    <string-array name="compass_direction">
+        <item>N</item>
+        <item>NE</item>
+        <item>E</item>
+        <item>SE</item>
+        <item>S</item>
+        <item>SW</item>
+        <item>W</item>
+        <item>NW</item>
+    </string-array>
     <string-array name="unit_types">
         <item></item>
         <item>Thousand</item>
@@ -73,9 +82,10 @@
     <string name="msgCalculated">Calculated success</string>
     <string name="menu_item_clean">Clear</string>
     <string name="menu_item_swap">Swap</string>
-	<string name="menu_item_sendmail">Export to Eail</string>
-	<string name="menu_item_sendexcel">Export to Excel</string>
-	<string name="sendEmail">Send E-mail</string>
-	<string name="sendExcel">Send Excel</string>
-	<string name="export">export</string>
+    <string name="menu_item_sendmail">Export to Eail</string>
+    <string name="menu_item_sendexcel">Export to Excel</string>
+    <string name="sendEmail">Send E-mail</string>
+    <string name="sendExcel">Send Excel</string>
+    <string name="export">export</string>
+
 </resources>

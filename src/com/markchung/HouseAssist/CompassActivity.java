@@ -23,6 +23,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
 	private Matrix matrix;
 	private Bitmap m_bmp;
 	private AdView adView;
+	private String [] prompt;
 
 	private void CreateBitmap() {
 		DisplayMetrics dm = new DisplayMetrics();
@@ -64,6 +65,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
 		imageView.setImageMatrix(matrix);
 		imageView.setImageBitmap(m_bmp);
 		m_info_view = (TextView) findViewById(R.id.info_view);
+		prompt = this.getResources().getStringArray(R.array.compass_direction);
 	}
 
 	@Override
@@ -85,14 +87,25 @@ public class CompassActivity extends Activity implements SensorEventListener {
 		// TODO Auto-generated method stub
 
 	}
-
+	private String getDirect(double value){
+		StringBuilder sb = new StringBuilder();
+		sb.append(Integer.toString((int)value)).append("¢X");
+		if(prompt==null) {
+			return sb.toString();
+		}
+		int i =(int) ((value+(45/2))/45);
+		i %= 8;
+		sb.append(' ').append(prompt[i]);
+		return sb.toString();
+	}
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		if (event.sensor.getType() != Sensor.TYPE_ORIENTATION)
 			return;
-		float value = 360 - event.values[SensorManager.DATA_X];
-		m_info_view.setText(Integer.toString((int) value));
+		float value = event.values[SensorManager.DATA_X];
+		m_info_view.setText(getDirect(360-value));
 		matrix.setRotate(value, m_bmp.getWidth() / 2, m_bmp.getHeight() / 2);
 		imageView.setImageMatrix(matrix);
 

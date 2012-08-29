@@ -87,13 +87,13 @@ public class ConverterActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onStop() {
-		super.onStop();
 		SharedPreferences settings = getSharedPreferences(MainActivity.TAG, 0);
 		SharedPreferences.Editor edit = settings.edit();
 		edit.putInt("ConverTargetUnit", m_target.getSelectedItemPosition());
 		edit.putInt("ConverSourceUnit", m_source.getSelectedItemPosition());
 		edit.putString("ConverInput", m_input.getText().toString());
 		edit.commit();
+		super.onStop();
 	}
 
 	@Override
