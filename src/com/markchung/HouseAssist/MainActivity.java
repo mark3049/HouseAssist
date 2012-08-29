@@ -13,12 +13,12 @@ import com.markchung.HouseAssist.Plan.Schedule;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -269,11 +269,13 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	private static File createTmpFile() throws IOException {
+	private File createTmpFile() throws IOException {
 		String fileName = "HosingAssist.csv";// csvScheduleCreator.getFileName();
-		File externalStorageDirectory = Environment
-				.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-		File file = new File(externalStorageDirectory, fileName);
+//		File externalStorageDirectory = Environment
+//				.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+//		File file = new File(externalStorageDirectory, fileName);
+		File file =  this.getFileStreamPath(fileName);
+		Log.d(TAG, file.toString());
 		file.deleteOnExit();
 		return file;
 	}
