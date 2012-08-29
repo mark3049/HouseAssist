@@ -144,6 +144,7 @@ public class PlanView implements OnCheckedChangeListener, OnFocusChangeListener 
 	}
 
 	public void CleanForm() {
+		this.m_edit_amount.setText("");
 		LoanPlan plan = new LoanPlan();
 		if (plan.period > 0) {
 			m_edit_period.setText(Integer.toString(plan.period));
