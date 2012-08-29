@@ -77,4 +77,5 @@
 	<string name="menu_item_sendexcel">Export to Excel</string>
 	<string name="sendEmail">Send E-mail</string>
 	<string name="sendExcel">Send Excel</string>
+	<string name="export">export</string>
 </resources>

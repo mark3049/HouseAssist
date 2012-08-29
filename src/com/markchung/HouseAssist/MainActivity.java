@@ -35,8 +35,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button m_Calculate;
 	private Button m_result_clean;
 	private Button m_btn_detail;
-	//private EditText m_edit_amount;
-	//private Spinner m_spinner_unit;
+	// private EditText m_edit_amount;
+	// private Spinner m_spinner_unit;
 	public static final String TAG = "HouseAssist";
 	public static final String myAdID = "a1502374da40dc1";
 	public static final String myTestDevice = "BA76119486D364D047D0C789B4F61E46";
@@ -71,7 +71,6 @@ public class MainActivity extends Activity implements OnClickListener {
 				.findViewById(R.id.resultshort_button);
 
 		m_plan = new PlanView(this, findViewById(R.id.loanPlanView));
-
 
 		m_Calculate.setOnClickListener(this);
 		m_result_clean.setOnClickListener(this);
@@ -110,7 +109,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		if ((result.getMaxPay() - result.getMinPay()) < 1) {
 			view.setText(nr.format(result.getMaxPay() + 0.5));
 		} else {
-			view.setText(String.format("%s - %s", nr.format(result.getMaxPay() + 0.5),
+			view.setText(String.format("%s - %s",
+					nr.format(result.getMaxPay() + 0.5),
 					nr.format(result.getMinPay() + 0.5)));
 		}
 		view = (TextView) m_shortResult.findViewById(R.id.resultshort_amount);
@@ -194,15 +194,17 @@ public class MainActivity extends Activity implements OnClickListener {
 			this.startActivity(intent);
 		}
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.option_main, menu);
 		return true;
 	}
+
 	@Override
-	public boolean onMenuOpened(int featureId, Menu menu){
-		boolean flag =this.m_lastPlan!=null;
-		
+	public boolean onMenuOpened(int featureId, Menu menu) {
+		boolean flag = this.m_lastPlan != null;
+
 		menu.findItem(R.id.menu_item_sendmail).setEnabled(flag);
 		menu.findItem(R.id.menu_item_sendexcel).setEnabled(flag);
 		return true;
@@ -211,7 +213,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		switch(id){
+		switch (id) {
 		case R.id.menu_item_clear:
 			ClearResult();
 			m_plan.CleanForm();
@@ -225,35 +227,54 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 		return true;
 	}
-	private void sendToMail(){
+
+	private void sendToMail() {
 		Resources resources = this.getResources();
-        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setType("text/text");
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.app_name) + " - export");
-        StringBuilder sb = new StringBuilder();
-        new ScheduleExport(resources,this.m_lastPlan).append(sb);
-        emailIntent.putExtra(Intent.EXTRA_TEXT, sb.toString());
-        startActivity(Intent.createChooser(emailIntent, resources.getString(R.string.sendEmail)));		
+		final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+		emailIntent.setType("text/text");
+		emailIntent.putExtra(
+				Intent.EXTRA_SUBJECT,
+				resources.getString(R.string.app_name) + " - "
+						+ resources.getString(R.string.export));
+		StringBuilder sb = new StringBuilder();
+		new ScheduleExport(resources, this.m_lastPlan).append(sb);
+		emailIntent.putExtra(Intent.EXTRA_TEXT, sb.toString());
+		startActivity(Intent.createChooser(emailIntent,
+				resources.getString(R.string.sendEmail)));
 	}
-	private void sendToExcel(){
-        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        try {
-        	File file = createTmpFile();
-        	new ScheduleExport(this.getResources(),this.m_lastPlan).save(file);
-	        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-	        emailIntent.setType("text/csv");
-	        startActivity(Intent.createChooser(emailIntent, this.getResources().getString(R.string.sendExcel)));
+
+	private void sendToExcel() {
+		final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+		Resources resources = this.getResources();
+		try {
+			File file = createTmpFile();
+			new ScheduleExport(this.getResources(), this.m_lastPlan).save(file);
+			emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+			emailIntent.setType("text/csv");
+			emailIntent.putExtra(
+					Intent.EXTRA_SUBJECT,
+					resources.getString(R.string.app_name) + " - "
+							+ resources.getString(R.string.export));
 			
+			StringBuilder sb = new StringBuilder();
+			new ScheduleExport(resources, this.m_lastPlan).append_info(sb);
+			emailIntent.putExtra(Intent.EXTRA_TEXT, sb.toString());
+			
+			startActivity(Intent.createChooser(emailIntent, this.getResources()
+					.getString(R.string.sendExcel)));
+
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT)
+					.show();
 		}
 	}
+
 	private static File createTmpFile() throws IOException {
-        String fileName = "HosingAssist.csv";//csvScheduleCreator.getFileName();
-        File externalStorageDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        File file = new File(externalStorageDirectory, fileName);
-        file.deleteOnExit();
-        return file;
-    }
+		String fileName = "HosingAssist.csv";// csvScheduleCreator.getFileName();
+		File externalStorageDirectory = Environment
+				.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+		File file = new File(externalStorageDirectory, fileName);
+		file.deleteOnExit();
+		return file;
+	}
 }
