@@ -76,5 +76,10 @@
     <string name="msgCalculated">計算完成</string>
     <string name="menu_item_clean">清除</string>
     <string name="menu_item_swap">單位交換</string>
-
+	<string name="menu_item_sendmail">Email 匯出</string>
+	<string name="menu_item_sendexcel">Excel 匯出</string>
+	<string name="sendEmail">傳送電子郵件</string>
+	<string name="sendExcel">傳送Excel檔案</string>
+	<string name="export">匯出</string>
+    
 </resources>
