@@ -3,7 +3,7 @@
 	<name>HouseAssistPro</name>
 	<comment></comment>
 	<projects>
-		<project>HouseAssistLibrary</project>
+		<project>library</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
