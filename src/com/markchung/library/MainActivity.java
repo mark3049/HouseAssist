@@ -1,4 +1,4 @@
-package com.markchung.HouseAssist;
+package com.markchung.library;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,9 +7,6 @@ import java.text.NumberFormat;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
-import com.markchung.HouseAssist.R;
-import com.markchung.HouseAssist.Plan.Schedule;
-
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,15 +34,16 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button m_btn_detail;
 	// private EditText m_edit_amount;
 	// private Spinner m_spinner_unit;
-	public static final String TAG = "HouseAssist";
+	public static String TAG = "HouseAssist";
 	public static final String myAdID = "a1502374da40dc1";
 	public static final String myTestDevice = "BA76119486D364D047D0C789B4F61E46";
 	private PlanView m_plan;
 	private LoanPlan m_lastPlan;
 	private AdView adView;
-
+	static public boolean AdFlag = true;
 	static public final AdView CreateAdRequest(Activity activity,
 			LinearLayout view) {
+		if(!AdFlag) return null;
 		AdView adview = new AdView(activity, AdSize.BANNER, MainActivity.myAdID);
 		view.addView(adview);
 		AdRequest adRequest = new AdRequest();
@@ -84,7 +82,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onDestroy() {
-		adView.destroy();
+		if(adView!=null) adView.destroy();
 		super.onDestroy();
 	}
 
@@ -213,17 +211,13 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		switch (id) {
-		case R.id.menu_item_clear:
+		if(id==R.id.menu_item_clear){
 			ClearResult();
 			m_plan.CleanForm();
-			break;
-		case R.id.menu_item_sendmail:
+		}else if (id==R.id.menu_item_sendmail){
 			sendToMail();
-			break;
-		case R.id.menu_item_sendexcel:
-			sendToExcel();
-			break;
+		}else if( id == R.id.menu_item_sendexcel){
+			sendToExcel();			
 		}
 		return true;
 	}

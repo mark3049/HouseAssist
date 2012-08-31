@@ -1,6 +1,4 @@
-package com.markchung.HouseAssist;
-
-import com.markchung.HouseAssist.R;
+package com.markchung.library;
 
 import android.content.Context;
 import android.content.SharedPreferences;

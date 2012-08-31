@@ -1,7 +1,6 @@
-package com.markchung.HouseAssist;
+package com.markchung.library;
 
 import com.google.ads.AdView;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -43,7 +42,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
 
 	@Override
 	protected void onDestroy() {
-		adView.destroy();
+		if(adView!=null) adView.destroy();
 		super.onDestroy();
 	}
 

@@ -1,4 +1,4 @@
-package com.markchung.HouseAssist.Plan;
+package com.markchung.library;
 
 public class Schedule{
 	private double[] m_payments; 

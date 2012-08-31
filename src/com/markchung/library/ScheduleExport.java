@@ -1,13 +1,10 @@
-package com.markchung.HouseAssist;
+package com.markchung.library;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.NumberFormat;
-
-import com.markchung.HouseAssist.Plan.Schedule;
-
 import android.content.res.Resources;
 
 public class ScheduleExport {

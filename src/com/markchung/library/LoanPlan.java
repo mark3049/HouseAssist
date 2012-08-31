@@ -1,7 +1,5 @@
-package com.markchung.HouseAssist;
+package com.markchung.library;
 
-import com.markchung.HouseAssist.Plan.InterestItem;
-import com.markchung.HouseAssist.Plan.Schedule;
 
 import android.os.Bundle;
 

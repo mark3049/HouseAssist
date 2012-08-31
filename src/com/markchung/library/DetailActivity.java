@@ -1,7 +1,4 @@
-package com.markchung.HouseAssist;
-
-import com.markchung.HouseAssist.R;
-import com.markchung.HouseAssist.Plan.Schedule;
+package com.markchung.library;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

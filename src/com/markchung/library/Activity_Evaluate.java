@@ -1,9 +1,8 @@
-package com.markchung.HouseAssist;
+package com.markchung.library;
 
 import java.text.NumberFormat;
 
 import com.google.ads.AdView;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -72,7 +71,7 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
-		adView.destroy();
+		if(adView!=null) adView.destroy();
 		super.onDestroy();
 	}
 

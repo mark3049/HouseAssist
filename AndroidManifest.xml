@@ -1,49 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.markchung.HouseAssist"
-    android:installLocation="auto"
-    android:versionCode="13"
-    android:versionName="1.1.5" >
-
-    <uses-sdk
-        android:minSdkVersion="4"
-        android:targetSdkVersion="15" />
-
-    <supports-screens
-        android:anyDensity="true"
-        android:resizeable="true" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <application
-        android:icon="@drawable/myapp2"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name=".MainTabActivity"
-            android:configChanges="keyboardHidden|orientation|keyboard"
-            android:label="@string/title_activity_main"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ConverterActivity" />
-        <activity android:name=".CompassActivity" />
-        <activity android:name=".Activity_Evaluate" />
-        <activity
-            android:name="com.markchung.HouseAssist.DetailActivity"
-            android:screenOrientation="portrait" 
-            android:theme="@style/NoTitleTheme"
-            />
-            
-        <activity
-            android:name="com.google.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-    </application>
+    package="com.markchung.library" >
+	<uses-sdk android:minSdkVersion="4" />
+    <activity android:name="MainActivity" />
+    <activity android:name="ConverterActivity" />
+    <activity android:name="CompassActivity" />
+    <activity android:name="Activity_Evaluate" />
+    <activity
+        android:name="DetailActivity" 
+        android:screenOrientation="portrait"
+        android:theme="@style/NoTitleTheme" />
 
 </manifest>

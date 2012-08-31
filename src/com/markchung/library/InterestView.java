@@ -1,9 +1,6 @@
-package com.markchung.HouseAssist;
+package com.markchung.library;
 
 import java.text.NumberFormat;
-
-import com.markchung.HouseAssist.R;
-import com.markchung.HouseAssist.Plan.InterestItem;
 
 import android.content.SharedPreferences;
 import android.view.View;

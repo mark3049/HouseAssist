@@ -1,4 +1,4 @@
-package com.markchung.HouseAssist;
+package com.markchung.library;
 
 import java.text.NumberFormat;
 
@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.google.ads.*;
 
 public class ConverterActivity extends Activity implements OnClickListener {
@@ -81,7 +80,7 @@ public class ConverterActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
-		adView.destroy();
+		if(adView!=null) adView.destroy();
 		super.onDestroy();
 	}
 
@@ -129,19 +128,15 @@ public class ConverterActivity extends Activity implements OnClickListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		int tmp;
-		switch(id){
-		case R.id.menu_item_clear:
+		if(id == R.id.menu_item_clear){
 			m_result.setText("");
 			m_input.setText("");
-			break;
-		case R.id.menu_item_swap:
+		}else if( id == R.id.menu_item_swap){
 			tmp = m_target.getSelectedItemPosition();
 			m_target.setSelection(m_source.getSelectedItemPosition());
 			m_source.setSelection(tmp);
-			break;
-		case R.id.menu_item_calculate:
-			onClick(m_btn);
-			break;			
+		}else if(id == R.id.menu_item_calculate){
+			onClick(m_btn);			
 		}
 		return true;
 	}
