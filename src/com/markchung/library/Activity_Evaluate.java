@@ -2,7 +2,6 @@ package com.markchung.library;
 
 import java.text.NumberFormat;
 
-import com.google.ads.AdView;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -29,15 +28,15 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 	Button m_calculate;
 	RadioButton m_sel_unit_price;
 	RadioButton m_sel_amount;
-	private AdView adView;
+	private AdRequest adView;
 	ColorStateList defColor;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_evaluate);
-		adView = MainActivity.CreateAdRequest(this,
-				(LinearLayout) findViewById(R.id.adview));
+		adView = MainTabActivity.getAdRequest();
+		adView.CreateAdRequest(this, (LinearLayout) findViewById(R.id.adview));
 
 		m_arce = (EditText) findViewById(R.id.eval_edit_area);
 		m_affiliated = (EditText) findViewById(R.id.eval_edit_affiliated);
@@ -53,7 +52,7 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 		defColor = m_amount.getTextColors();
 		boolean isamount = false;
 		if (savedInstanceState == null) {
-			SharedPreferences sets = getSharedPreferences(MainActivity.TAG, 0);
+			SharedPreferences sets = getSharedPreferences(MainTabActivity.TAG, 0);
 			isamount = sets.getBoolean("eval_isamount", false);
 			m_arce.setText(sets.getString("eval_arce", ""));
 			m_affiliated.setText(sets.getString("eval_affiliated", "0"));
@@ -70,14 +69,13 @@ public class Activity_Evaluate extends Activity implements OnClickListener,
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		if(adView!=null) adView.destroy();
+		adView.Destroy();
 		super.onDestroy();
 	}
 
 	@Override
 	protected void onStop() {
-		SharedPreferences settings = getSharedPreferences(MainActivity.TAG, 0);
+		SharedPreferences settings = getSharedPreferences(MainTabActivity.TAG, 0);
 		SharedPreferences.Editor edit = settings.edit();
 		edit.putBoolean("eval_isamount", m_sel_amount.isChecked());
 		edit.putString("eval_arce", m_arce.getText().toString());

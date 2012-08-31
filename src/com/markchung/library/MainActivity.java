@@ -3,10 +3,6 @@ package com.markchung.library;
 import java.io.File;
 import java.io.IOException;
 import java.text.NumberFormat;
-
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,33 +28,17 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button m_Calculate;
 	private Button m_result_clean;
 	private Button m_btn_detail;
-	// private EditText m_edit_amount;
-	// private Spinner m_spinner_unit;
-	public static String TAG = "HouseAssist";
-	public static final String myAdID = "a1502374da40dc1";
-	public static final String myTestDevice = "BA76119486D364D047D0C789B4F61E46";
 	private PlanView m_plan;
 	private LoanPlan m_lastPlan;
-	private AdView adView;
-	static public boolean AdFlag = true;
-	static public final AdView CreateAdRequest(Activity activity,
-			LinearLayout view) {
-		if(!AdFlag) return null;
-		AdView adview = new AdView(activity, AdSize.BANNER, MainActivity.myAdID);
-		view.addView(adview);
-		AdRequest adRequest = new AdRequest();
-		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
-		adRequest.addTestDevice(MainActivity.myTestDevice);
-		adview.loadAd(adRequest);
-		return adview;
-	}
+	private AdRequest adView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Debug.startMethodTracing(TAG);
 		setContentView(R.layout.activity_main);
-		adView = CreateAdRequest(this, (LinearLayout) findViewById(R.id.adview));
+		adView = MainTabActivity.getAdRequest();
+		adView.CreateAdRequest(this, (LinearLayout) findViewById(R.id.adview));
 
 		m_shortResult = (LinearLayout) this.findViewById(R.id.ResultListView);
 		m_shortResult.setVisibility(View.GONE);
@@ -75,20 +55,20 @@ public class MainActivity extends Activity implements OnClickListener {
 		m_btn_detail.setOnClickListener(this);
 
 		if (savedInstanceState == null) {
-			SharedPreferences settings = getSharedPreferences(TAG, 0);
+			SharedPreferences settings = getSharedPreferences(MainTabActivity.TAG, 0);
 			m_plan.Load(settings);
 		}
 	}
 
 	@Override
 	protected void onDestroy() {
-		if(adView!=null) adView.destroy();
+		adView.Destroy();
 		super.onDestroy();
 	}
 
 	@Override
 	protected void onStop() {
-		SharedPreferences settings = getSharedPreferences(TAG, 0);
+		SharedPreferences settings = getSharedPreferences(MainTabActivity.TAG, 0);
 		SharedPreferences.Editor edit = settings.edit();
 		m_plan.Save(edit);
 		edit.commit();
@@ -269,7 +249,7 @@ public class MainActivity extends Activity implements OnClickListener {
 //				.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 //		File file = new File(externalStorageDirectory, fileName);
 		File file =  this.getFileStreamPath(fileName);
-		Log.d(TAG, file.toString());
+		Log.d(MainTabActivity.TAG, file.toString());
 		file.deleteOnExit();
 		return file;
 	}

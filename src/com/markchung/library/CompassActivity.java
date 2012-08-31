@@ -1,6 +1,5 @@
 package com.markchung.library;
 
-import com.google.ads.AdView;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,7 +20,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
 	private ImageView imageView;
 	private Matrix matrix;
 	private Bitmap m_bmp;
-	private AdView adView;
+	private AdRequest adView;
 	private String [] prompt;
 
 	private void CreateBitmap() {
@@ -42,7 +41,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
 
 	@Override
 	protected void onDestroy() {
-		if(adView!=null) adView.destroy();
+		adView.Destroy();
 		super.onDestroy();
 	}
 
@@ -52,8 +51,8 @@ public class CompassActivity extends Activity implements SensorEventListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_compass);
-		adView = MainActivity.CreateAdRequest(this,
-				(LinearLayout) findViewById(R.id.adview));
+		adView = MainTabActivity.getAdRequest();
+		adView.CreateAdRequest(this, (LinearLayout) findViewById(R.id.adview));
 
 		CreateBitmap();
 		sm = (SensorManager) getSystemService(SENSOR_SERVICE);

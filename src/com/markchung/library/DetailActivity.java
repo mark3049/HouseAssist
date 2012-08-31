@@ -32,7 +32,7 @@ public class DetailActivity extends Activity implements OnItemSelectedListener  
 		m_view = (ListView) this.findViewById(R.id.activity_detail_list);
 		m_type = (Spinner) findViewById(R.id.detail_type);
 		if (savedInstanceState == null) {
-			SharedPreferences settings = getSharedPreferences(MainActivity.TAG,
+			SharedPreferences settings = getSharedPreferences(MainTabActivity.TAG,
 					0);
 			m_type.setSelection(settings.getInt("detail_type", 0));
 		}
@@ -58,7 +58,7 @@ public class DetailActivity extends Activity implements OnItemSelectedListener  
 	}
 	@Override
 	protected void onStop() {
-		SharedPreferences settings = getSharedPreferences(MainActivity.TAG, 0);
+		SharedPreferences settings = getSharedPreferences(MainTabActivity.TAG, 0);
 		SharedPreferences.Editor edit = settings.edit();
 		edit.putInt("detail_type", m_type.getSelectedItemPosition());
 		edit.commit();

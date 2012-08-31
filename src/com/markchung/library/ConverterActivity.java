@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.google.ads.*;
 
 public class ConverterActivity extends Activity implements OnClickListener {
 
@@ -53,14 +52,14 @@ public class ConverterActivity extends Activity implements OnClickListener {
 	private Spinner m_source;
 	private EditText m_input;
 	private Button m_btn;
-	private AdView adView;
+	private AdRequest adView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_converter);
-		adView = MainActivity.CreateAdRequest(this,
-				(LinearLayout) findViewById(R.id.adview));
+		adView = MainTabActivity.getAdRequest();
+		adView.CreateAdRequest(this, (LinearLayout) findViewById(R.id.adview));
 
 		m_input = (EditText) findViewById(R.id.editText1);
 		m_result = (EditText) findViewById(R.id.conver_result);
@@ -69,7 +68,7 @@ public class ConverterActivity extends Activity implements OnClickListener {
 		m_btn = (Button) findViewById(R.id.button_calculate);
 		m_btn.setOnClickListener(this);
 		if (savedInstanceState == null) {
-			SharedPreferences settings = getSharedPreferences(MainActivity.TAG,
+			SharedPreferences settings = getSharedPreferences(MainTabActivity.TAG,
 					0);
 			m_input.setText(settings.getString("ConverInput", ""));
 			m_target.setSelection(settings.getInt("ConverTargetUnit", 5));
@@ -79,14 +78,13 @@ public class ConverterActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		if(adView!=null) adView.destroy();
+		adView.Destroy();
 		super.onDestroy();
 	}
 
 	@Override
 	protected void onStop() {
-		SharedPreferences settings = getSharedPreferences(MainActivity.TAG, 0);
+		SharedPreferences settings = getSharedPreferences(MainTabActivity.TAG, 0);
 		SharedPreferences.Editor edit = settings.edit();
 		edit.putInt("ConverTargetUnit", m_target.getSelectedItemPosition());
 		edit.putInt("ConverSourceUnit", m_source.getSelectedItemPosition());
