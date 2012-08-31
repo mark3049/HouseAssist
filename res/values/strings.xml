@@ -40,8 +40,10 @@
     <string name="result_short_interest">Total interest</string>
     <string name="result_short_amount">Total amount</string>
     <string name="result_short_button">Schedule</string>
-    <string name="app_name">Housing Assist</string>
-    <string name="title_activity_main">Housing Assist</string>
+    <string name="app_name">HousingAssistAd</string>
+    <string name="app_name_pro">HousingAssist</string>
+    <string name="title_activity_main">Housing Assist Ad</string>
+    <string name="title_activity_pro">Housing Assist</string>
     <string name="amount">Amount</string>
     <string name="period">Period</string>
     <string name="amount_Hint">&gt;0</string>
