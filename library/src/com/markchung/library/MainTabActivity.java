@@ -21,7 +21,7 @@ public class MainTabActivity extends TabActivity {
 		if (m_ad == null) {
 			m_ad = new AdRequest();
 		}
-		return m_ad;
+		return m_ad.getAd();
 	}
 
 	public void onCreate(Bundle savedInstanceState) {

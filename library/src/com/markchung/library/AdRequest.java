@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.widget.LinearLayout;
 
 public class AdRequest {
+	public AdRequest getAd(){
+		return new AdRequest();
+	}
+	
 	public AdRequest(){
 		
 	}

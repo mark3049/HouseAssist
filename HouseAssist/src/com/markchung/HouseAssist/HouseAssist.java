@@ -18,6 +18,17 @@ public class HouseAssist extends com.markchung.library.MainTabActivity {
 		private static final String myAdID = "a1502374da40dc1";
 		private static final String myTestDevice = "BA76119486D364D047D0C789B4F61E46";
 		private AdView adview;
+
+		public MyAdRequest(){
+			
+		}
+		
+		public com.markchung.library.AdRequest getAd(){
+			MyAdRequest ad = new MyAdRequest();
+			return (com.markchung.library.AdRequest)ad;
+		}
+
+		@Override
 		public void CreateAdRequest(Activity activity,
 				LinearLayout view) {
 			adview = new AdView(activity, AdSize.BANNER,
@@ -28,6 +39,8 @@ public class HouseAssist extends com.markchung.library.MainTabActivity {
 			adRequest.addTestDevice(myTestDevice);
 			adview.loadAd(adRequest);
 		}
+
+		@Override
 		public void Destroy() {
 			adview.destroy();
 		}		
