@@ -8,7 +8,7 @@
         android:id="@+id/edit_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:hint="@string/rate_Hint"
         android:imeOptions="actionNext"
         android:inputType="numberDecimal" />
@@ -38,7 +38,7 @@
         android:id="@+id/edit_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:hint="@string/months_Hint"
         android:imeOptions="actionNext"
         android:inputType="number" />

@@ -54,7 +54,7 @@
     <string name="number_zero">0</string>
     <string name="tilde">~</string>
     <string name="months_Hint">&gt;0</string>
-    <string name="month">Months</string>
+    <string name="month">M</string>
     <string name="percent">%</string>
     <string name="rate_Hint">annual</string>
     <string name="grace_period">Grace</string>
