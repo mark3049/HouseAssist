@@ -35,8 +35,10 @@ public class HouseAssist extends com.markchung.library.MainTabActivity {
 					myAdID);
 			view.addView(adview);
 			AdRequest adRequest = new AdRequest();
-			adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
-			adRequest.addTestDevice(myTestDevice);
+			if(BuildConfig.DEBUG){
+				adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+				adRequest.addTestDevice(myTestDevice);
+			}
 			adview.loadAd(adRequest);
 		}
 
