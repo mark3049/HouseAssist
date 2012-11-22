@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class DetailActivity extends Activity implements OnItemSelectedListener  {
+public class DetailActivity extends Activity implements OnItemSelectedListener {
 	private LoanPlan plan;
 	private ProgressDialog myDialog;
 	private ListView m_view;
@@ -32,45 +32,49 @@ public class DetailActivity extends Activity implements OnItemSelectedListener  
 		m_view = (ListView) this.findViewById(R.id.activity_detail_list);
 		m_type = (Spinner) findViewById(R.id.detail_type);
 		if (savedInstanceState == null) {
-			SharedPreferences settings = getSharedPreferences(MainTabActivity.TAG,
-					0);
+			SharedPreferences settings = getSharedPreferences(
+					MainTabActivity.TAG, 0);
 			m_type.setSelection(settings.getInt("detail_type", 0));
 		}
 		m_lastType = m_type.getSelectedItemPosition();
 		Bundle extras = this.getIntent().getExtras();
-		if(extras!=null){
+		if (extras != null) {
 			plan = new LoanPlan(extras);
 			doUpdateList();
 		}
 		m_back = (Button) findViewById(R.id.button_back);
-		
-		m_back.setOnClickListener(new View.OnClickListener(){
+
+		m_back.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				finish();				
+				finish();
 			}
-			
+
 		});
 		m_type.setOnItemSelectedListener(this);
-		//ResultListAdapter adapter = new ResultListAdapter(this,null);
-		//view.setAdapter(adapter);
+		// ResultListAdapter adapter = new ResultListAdapter(this,null);
+		// view.setAdapter(adapter);
 	}
+
 	@Override
 	protected void onStop() {
-		SharedPreferences settings = getSharedPreferences(MainTabActivity.TAG, 0);
+		SharedPreferences settings = getSharedPreferences(MainTabActivity.TAG,
+				0);
 		SharedPreferences.Editor edit = settings.edit();
 		edit.putInt("detail_type", m_type.getSelectedItemPosition());
 		edit.commit();
 		super.onStop();
-	}	
-	private void doUpdateList(){
+	}
+
+	private void doUpdateList() {
 		CharSequence title = this.getString(R.string.dialog_title_wait);
 		CharSequence message = getString(R.string.dialog_body_calcelate);
 		myDialog = ProgressDialog.show(this, title, message, true, true);
 		new CalculateTask().execute(plan);
 	}
-	private void fill_title(View view){
+
+	private void fill_title(View view) {
 		TextView t = (TextView) view.findViewById(R.id.item_index);
 		t.setText(getString(R.string.result_nr));
 		t = (TextView) view.findViewById(R.id.item_principal);
@@ -81,14 +85,18 @@ public class DetailActivity extends Activity implements OnItemSelectedListener  
 		t.setText(getString(R.string.result_payment));
 
 	}
+
 	private class CalculateTask extends AsyncTask<LoanPlan, Void, Schedule> {
 
 		@Override
 		protected void onPostExecute(Schedule result) {
-			boolean isYear = m_type.getSelectedItemPosition()==0;
-			ResultListAdapter adapter = new ResultListAdapter(DetailActivity.this,result,isYear);
+			boolean isYear = m_type.getSelectedItemPosition() == 0;
+			ResultListAdapter adapter = new ResultListAdapter(
+					DetailActivity.this, result, isYear);
 			m_view.setAdapter(adapter);
-			myDialog.dismiss();
+			if (myDialog != null) {
+				myDialog.dismiss();
+			}
 			myDialog = null;
 		}
 
@@ -98,18 +106,20 @@ public class DetailActivity extends Activity implements OnItemSelectedListener  
 		}
 
 	}
+
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 			long arg3) {
-		if(m_lastType != m_type.getSelectedItemPosition()){
+		if (m_lastType != m_type.getSelectedItemPosition()) {
 			m_lastType = m_type.getSelectedItemPosition();
 			doUpdateList();
 		}
-		
+
 	}
+
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
