@@ -15,7 +15,7 @@ public class HouseAssist extends com.markchung.library.MainTabActivity {
 	public static final String TAG = "HouseAssist";
 
 	class MyAdRequest extends com.markchung.library.AdRequest{
-		private static final String myAdID = "a1502374da40dc1";
+		private static final String myAdID = "ca-app-pub-3822862541892480/5314153831";
 		private static final String myTestDevice = "BA76119486D364D047D0C789B4F61E46";
 		private AdView adview;
 
